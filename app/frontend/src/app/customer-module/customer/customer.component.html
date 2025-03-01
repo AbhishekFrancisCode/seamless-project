@@ -1,0 +1,72 @@
+<div class="row">
+    <a nbButton href="CustomerList" status="success" size="small">Back</a>
+</div><br>
+<nb-tabset>
+    <nb-tab tabTitle="Customer Information">
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label class="text-capitalize" for="">Customer Type<span style="color: red;">*</span></label>
+                        <select class="form-control text-capitalize" nbInput name="CustomerType" 
+                        formControlName="customertypeFormControl" aria-placeholder="CustomerType" (ngModel)="Customer_Type" 
+                        [ngClass]="{ 'is-invalid': submitted && f.customertypeFormControl.errors }" class="form-control" >
+                        <option class="text-capitalize" *ngFor="let item of Customer_Type" value="{{item.value}}" >
+                            {{ item.name }} 
+                         </option>
+                        </select>
+                        <div *ngIf="submitted && f.customertypeFormControl.errors" class="invalid-feedback">
+                            <div *ngIf="f.customertypeFormControl.errors.required">Customer Type is required</div>
+                        </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="CustomerName">Customer Name<span style="color: red;">*</span></label>
+                    <input  type="text" formControlName="customernameFormControl" nbInput name="customername" placeholder="Customer Name"
+                    [ngClass]="{ 'is-invalid': submitted && f.customernameFormControl.errors }" class="form-control" required/>
+                    <div *ngIf="submitted && f.customernameFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.customernameFormControl.errors.required">Customer name is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="address_line1">Address Line-1</label><br>
+                    <textarea type="text"  nbInput formControlName="addressline1FormControl" name="address_line1" placeholder="Address Line1"></textarea>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="address_line2">Address Line-2</label><br>
+                    <textarea type="text"  nbInput formControlName="addressline2FormControl" name="address_line2" placeholder="Address Line2"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="phonenumber">Phone Number</label><br>
+                    <input type="text"  nbInput formControlName="phonenumberFormControl" name="phonenumber" placeholder="Phone Number"
+                    [ngClass]="{ 'is-invalid': submitted && f.phonenumberFormControl.errors }" class="form-control" required/>
+                    <div *ngIf="submitted && f.phonenumberFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="submitted && f.phonenumberFormControl.errors.required">Phone Number is Required</div>
+                    </div>
+                </div>
+            <div class="form-group col-md-3">
+                <label for="Email">Email</label><br>
+                <input type="text"  nbInput formControlName="EmailFormControl" name="Email" placeholder="Email"
+                [ngClass]="{ 'is-invalid': submitted && f.EmailFormControl.errors }" class="form-control" required
+                />
+                <div *ngIf="submitted && f.EmailFormControl.errors" class="invalid-feedback">
+                    <div *ngIf="submitted && f.EmailFormControl.errors.required">Email is Required</div>
+                </div>
+            </div>
+        </div>
+        <div class=" form-group col-md-3">
+            <label for="active">Active</label>
+            <input type="checkbox" [(ngModel)]="active" [checked]="true" formControlName="customerActivateFormControl" id="active" name="active"/>
+        </div>
+        <div class=" form-group col-md-3">
+            <label for="blocked_yn">Blocked YN</label>
+            <input type="checkbox" [(ngModel)]="blocked_yn" [checked]="false" formControlName="blocked_ynFormControl" id="active" name="active"/>
+            
+        </div>
+        <button nbButton [hidden]="!createFlag"  (click)="saveCustomer();"  status="success" type="submit" class="btn">Save</button>
+        <button nbButton [hidden]="createFlag"   (click)="updateCustomer();" status="success" type="submit" class="btn">Update</button>&nbsp;&nbsp;
+        </form>
+        </nb-tab>
+</nb-tabset>

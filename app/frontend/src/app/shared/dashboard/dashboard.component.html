@@ -1,0 +1,93 @@
+
+
+
+
+<nb-tabset>
+    <nb-tab tabTitle="Dashboard">
+        <div class="row">
+        <div class="col-md-4">
+            <nb-card style="background-color:rgb(150, 249, 216)">
+                <nb-card-header>
+                    No. Of Applications
+                </nb-card-header>
+                <nb-card-body>
+                  {{Order_List.length}}
+                </nb-card-body>
+
+            </nb-card>
+        </div>
+        <div class="col-md-4">
+            <nb-card style="background-color:rgb(114, 245, 254)">
+                <nb-card-header>
+                    No. Of Application In New
+                </nb-card-header>
+                <nb-card-body>
+                   {{result.length}}
+                </nb-card-body>
+
+            </nb-card>
+        </div>
+        <div class="col-md-4">
+            <nb-card style="background-color:rgb(114, 245, 254)">
+                <nb-card-header>
+                    No. Of Application In Progress
+                </nb-card-header>
+                <nb-card-body>
+                   {{result1.length}}
+                </nb-card-body>
+
+            </nb-card>
+        </div>
+        <div class="col-md-4">
+            <nb-card style="background-color:rgb(114, 186, 254)">
+                <nb-card-header>
+                    No. Of Application Completed
+                </nb-card-header>
+                <nb-card-body>
+                  {{result2.length}}
+                </nb-card-body>
+
+            </nb-card>
+        </div>
+        <div class="col-md-4">
+            <nb-card style="background-color:rgb(114, 186, 254)">
+                <nb-card-header>
+                    No. Of Application Hold
+                </nb-card-header>
+                <nb-card-body>
+                  {{result3.length}}
+                </nb-card-body>
+
+            </nb-card>
+        </div>
+        <div class="col-md-4">
+            <nb-card style="background-color:rgb(114, 186, 254)">
+                <nb-card-header>
+                    No. Of Application Rejected
+                </nb-card-header>
+                <nb-card-body>
+                  {{result4.length}}
+                </nb-card-body>
+
+            </nb-card>
+        </div>
+       </div>
+    </nb-tab>
+    <nb-tab tabTitle="New Orders({{payment_details?.length}})">
+        <div class="col-md-6">
+            <nb-card style="width: 60em;">
+                <nb-card-header style="color:#3366FF;">
+               <b><u>New Order Details</u></b>
+                </nb-card-header>
+                <div>
+                  <ng2-smart-table [settings]="paymentSettings" [source]="payment_details"></ng2-smart-table>
+                </div>
+            </nb-card>
+            </div>
+    </nb-tab>
+    <nb-tab tabTitle="({{warranty_list?.length}}) Notification">
+    </nb-tab>
+    <nb-tab tabTitle="({{payment_list?.length}}) Payments Due ">
+
+    </nb-tab>
+</nb-tabset>

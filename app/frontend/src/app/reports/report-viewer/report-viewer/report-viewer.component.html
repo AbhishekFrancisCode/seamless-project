@@ -1,0 +1,120 @@
+<div class="card" style="margin: 50px 0;">
+    <div class="d-flex justify-content-between p-4 m-2" id="header">
+      <div class="logo" style="width: 150px; margin: 25px;">
+        <img src="../../../assets/images/LOGO.png" alt="" width="150px">
+      </div>
+      <div class="heading text-center text-uppercase">
+        <h5>{{branch_name}}</h5>
+        <h6>{{ report_main_header }}</h6>
+        <h6 *ngIf="from">{{ from }} to {{ to }}</h6>
+      </div>
+      <div class="address" style="width: 150px; margin: 25px;">
+        <p>Shimoga, Karnataka</p>
+      </div>
+    </div>
+  
+    <div class="body p-4">
+      <!-- <div class="description">
+        <p>Name : {{ report_name }}</p>
+        <p>ID : {{ report_id }}</p>
+      </div> -->
+      <!-- [virtualScroll]="true" [virtualRowHeight]="34"  -->
+      <!--   -->
+      <p-table id="excel-table" [scrollable]="true" scrollHeight="600px" #dt [value]="sql_output"
+        responsiveLayout="scroll" selectionMode="multiple" [(selection)]="selectedRows"
+        [exportHeader]="customExportHeader" exportFilename="Report" styleClass="p-datatable-gridlines"
+        [globalFilterFields]="columns" (onFilter)="onFilter($event, dt)"
+        [style]="{'font-size': '14px', 'margin-top': '20px'}">
+  
+        <ng-template pTemplate="caption">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
+            <div class="flex">
+              <button pButton label="Clear" class="p-button-outlined mr-2" icon="pi pi-filter-slash"
+                (click)="clear(dt)"></button>
+              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportToexel()"
+                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+              <!-- <p-multiSelect [options]="columns" [(ngModel)]="selectedCities" ></p-multiSelect> -->
+  
+              <p-multiSelect [options]="filtered_obj_columns" optionLabel="name" [(ngModel)]="selectedColumns"
+                defaultLabel="Select a column" class="multiselect-custom" [filter]="true" [showClear]="true"
+                [virtualScroll]="true" [itemSize]="50" (onChange)="onChangeHandler($event)" optionValue="value" display="chip">
+  
+                <ng-template let-value pTemplate="selectedItems">
+                  <div class="country-item country-item-value" *ngFor="let option of selectedColumns">
+                    <div>{{option}}</div>
+                  </div>
+                  <div *ngIf="!selectedColumns || selectedColumns.length === 0" class="country-placeholder">
+                    Select Columns
+                  </div>
+                </ng-template>
+                <ng-template let-value pTemplate="item">
+                  <div class="country-item">
+                    <div>{{value.name}}</div>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </div>
+            <div class="flex">
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Search keyword" />
+              </span>
+            </div>
+          </div>
+          <hr>
+          <div style="display: flex; flex-wrap: wrap;">
+            <p-calendar [(ngModel)]="from_date" dateFormat="yy-mm-dd" placeholder="From Date"
+              [inputStyle]="{'width': '350px'}" class="mr-2"></p-calendar>
+            <p-calendar [(ngModel)]="to_date" dateFormat="yy-mm-dd" placeholder="To Date"
+              [inputStyle]="{'width': '350px'}" class="mr-2"></p-calendar>
+            <p-multiSelect [options]="filter_columns_array" [(ngModel)]="selectedFilterColumn"
+              optionLabel="display_name"></p-multiSelect>
+            <button pButton type="button" label="Show Data" (click)="showData()"
+              style="white-space: nowrap; margin-left: auto;" class="mt-2"></button>
+          </div>
+          <div style="display: flex; flex-wrap: wrap;">
+            <div *ngFor="let col of selectedFilterColumn">
+              <label for="col">{{col.display_name}} : </label>
+              <input pInputText type="text" placeholder="{{col.display_name}}" name="{{col.display_name}}"
+                [(ngModel)]="col.column_value" />
+            </div>
+          </div>
+        </ng-template>
+  
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let header of columns; let i=index" pSortableColumn={{columns[i]}}
+              style="flex-wrap: wrap; white-space: wrap;width:230px">
+              {{header}}
+              <p-sortIcon field={{columns[i]}}></p-sortIcon>
+              <p-columnFilter type="text" field={{columns[i]}} display="menu"></p-columnFilter>
+            </th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td colspan="16" class="p-4">
+              No Data Found, Select a Date range
+            </td>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-sqloutput>
+          <tr>
+            <td *ngFor="let column of columns; let i=index" style="width:200px;flex-wrap: wrap; white-space: wrap;">{{
+              sqloutput[columns[i]] }}</td>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="footer">
+          <tr>
+            <td *ngFor="let column of columnTotal; let i=index">{{ column }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>

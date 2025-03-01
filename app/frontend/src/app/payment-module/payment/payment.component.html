@@ -1,0 +1,173 @@
+<div class="row">
+  <a nbButton href="PaymentList" status="success" size="small">Back</a>
+</div><br>
+<nb-tabset>
+    <nb-tab tabTitle="Payment Information">
+        <form [formGroup]="PaymentForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+        <div class="col-md-3">
+            <label for="order_No">Order Number</label>
+            <input formControlName="orderNoFormControl" name="order_No" placeholder="Order Number" class="form-control"
+            (keypress)="open_OrderNo_dialog(OrderNo_dialog)" (click)="open_OrderNo_dialog(OrderNo_dialog)" readonly 
+            [ngClass]="{ 'is-invalid': submitted && f['orderNoFormControl'].errors }" required/>
+            <div *ngIf="submitted && f['orderNoFormControl'].errors"
+            class="invalid-feedback">
+            <div *ngIf="f['orderNoFormControl'].errors['required']">Order Number is required
+            </div>
+        </div>
+          </div>
+          <div class="col-md-3">
+            <label for="service_name">Service Name</label>
+            <input formControlName="serviceNameFormControl" name="service_name" placeholder="Service Name" class="form-control"
+            (keypress)="open_service_dialog(service_dialog)" (click)="open_service_dialog(service_dialog)"  readonly/>
+             
+              
+          </div>
+          <div class="col-md-3">
+            <label for="customer_name">Customer Name</label>
+            <input formControlName="customerFormControl" name="customer_name" placeholder="Customer Number" class="form-control"
+            (keypress)="open_customer_dialog(customer_dialog)" (click)="open_customer_dialog(customer_dialog)"
+               readonly /></div>
+               <div class="mb-3 text center mt-3">
+                <span><b>Order Code:{{order_code}}</b></span>
+               </div>
+          </div><hr>
+          <div class="row">
+            <div class="col-md-3">
+                 <label for="paymentdate">Payment Date &nbsp;&nbsp;</label>
+                 <input type="date" formControlName="paymentdateFormControl" nbInput name="paymentdate" placeholder="Payment Date"/>
+               </div>
+                  <div class="col-md-3">
+                 <label for="billed_amount">Billed Amount</label>
+                 <input type="text" formControlName="billedFormControl" nbInput name="billed_amount"
+                   placeholder="Billed Amount" readonly/>
+              </div>
+              <div class="col-md-3">
+                <label for="payment_amount">Payment Amount</label>
+                <input type="text" formControlName="paymentamountFormControl" nbInput name="payment_amount" class="form-control text-capitalize"
+                  placeholder="Payment Amount" (change)="calculate();"  [ngClass]="{ 'is-invalid': submitted && f['paymentamountFormControl'].errors }" required/>
+                  <div *ngIf="submitted && f['paymentamountFormControl'].errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f['paymentamountFormControl'].errors['required']">Payment Amount is required
+                  </div>
+              </div>
+              </div>
+                 </div><hr>
+          <div class="row">
+            <div class="col-md-3">
+              <label for="balance_amount">Balance Amount</label>
+              <input type="text" formControlName="balanceFormControl" nbInput name="balance_amount"
+                placeholder="Balance Amount" readonly />
+            </div>
+          <div class="col-md-3">
+            <label class="text-capitalize" for="">Payment Type</label>
+            <select class="form-control text-capitalize" name="payment_type" formControlName="paymentTypeFormControl"
+            [ngClass]="{ 'is-invalid': submitted && f['paymentTypeFormControl'].errors }" required
+              aria-placeholder="payment_type" (ngModel)="Payment_Type">
+              <option class="text-capitalize" *ngFor="let item of Payment_Type" value="{{item.value}}">
+                {{ item.name }}
+              </option>
+            </select>
+            <div *ngIf="submitted && f['paymentTypeFormControl'].errors"
+            class="invalid-feedback">
+            <div *ngIf="f['paymentTypeFormControl'].errors['required']">Payment Type is required
+            </div>
+        </div>
+          </div>
+          <div class="col-md-3">
+            <label for="remarks">Remarks</label>
+            <textarea type="text" formControlName="remarksFormControl" nbInput name="remarks"
+              placeholder="Remarks"></textarea>
+          </div></div><br>
+          <div>
+          <button nbButton [hidden]="!createFlag" (click)="savePayment();" status="success" type="submit" class="btn">Save</button>
+          <button nbButton [hidden]="createFlag" (click)="updatePayment();" status="success" type="submit" class="btn">Update</button>&nbsp;&nbsp;
+        </div>
+        </form>
+    </nb-tab>
+</nb-tabset>
+<ng-template #OrderNo_dialog let-data let-ref="dialogRef" >
+  <nb-card size="medium" >
+    <nb-card-header>Order List<input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchorderNo"/> </nb-card-header>
+    <nb-card-body>
+      <nb-list>
+          <nb-list-item *ngFor="let item of order_list| search_filter:'order_no':searchorderNo">
+            <i class="mr-auto mt-2 mt-lg-0">{{item.order_no}}</i>
+            <button nbButton (click)="ref.close(item)" size="small">Select</button>
+          </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+<ng-template #service_dialog let-data let-ref="dialogRef" >
+  <nb-card size="medium" >
+    <nb-card-header>Service List<input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchService"/> </nb-card-header>
+    <nb-card-body>
+      <nb-list>
+          <nb-list-item *ngFor="let item of service_list| search_filter:'service_name':searchService">
+            <i class="mr-auto mt-2 mt-lg-0">{{item.service_name}}</i>
+            <button nbButton (click)="ref.close(item)" size="small">Select</button>
+          </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+<ng-template #customer_dialog let-data let-ref="dialogRef" >
+  <nb-card size="medium" >
+    <nb-card-header>Customer List<input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchCustomer"/> </nb-card-header>
+    <nb-card-body>
+      <nb-list>
+          <nb-list-item *ngFor="let item of customer_list| search_filter:'customer_name':searchCustomer">
+            <i class="mr-auto mt-2 mt-lg-0">{{item.customer_name}}</i>
+            <button nbButton (click)="ref.close(item)" size="small">Select</button>
+          </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+<div>
+    <nb-card size="large" style="width: 1200px;">
+        <nb-card-header>Last Transactions</nb-card-header>
+        <nb-card-body>
+          <table class="table table-hover">
+            <thead>
+                <th>Order Number</th>
+                <th>Service Name</th>
+                <th>Customer Name</th>
+                <th>Payment Date</th>
+                <th>Billed Amount</th>
+                <th>Payment Amount</th>
+                <th>Balance Amount</th>
+                <th>Payment Type</th>
+                <th>Remarks</th>
+                <th>Transaction Id</th>
+                <th>Payment Status</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of details;">
+                <td><i class="mr-auto mt-0 mt-lg-0">{{item.order_no}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.service_name}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.customer_name}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.payment_date}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.billed_amount}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.payment_amount}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.balance_amount}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.payment_type}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.remarks}}</i></td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.transaction_id}}</i> </td>
+                <td><i class="mr-auto mt-2 mt-lg-0">{{item.payment_status}}</i> </td>
+            </tr>
+          </tbody>
+        </table>
+        </nb-card-body>
+    </nb-card>
+</div>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Response Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 20px;
+        }
+    .aon-categories-area2-iconbox {
+        border: 1px solid #ea1818;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(214 240 5);
+            margin: 20px;
+            width: 40%;
+        }
+        h2 {
+            color:  #32a9cb;
+        }
+
+  table {
+            border-collapse: collapse;
+<!--            width: 80%;-->
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+            word-wrap: break-word; /* Enable word wrapping */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            width: 200px; /* Set the width for th */
+        }
+
+        td {
+            width: 300px; /* Set the width for td */
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <h2> Online Transaction Result </h2>
+     <div class="aon-categories-area2-iconbox aon-icon-effect">
+    <table border="1"  >
+        <tr  style="display: none;">
+            <th>
+                Txn Status
+            </th>
+            <td>
+                {{ data.0 }}
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Txn Message
+            </th>
+            <td>
+                {{ data.1 }}
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Txn Error Message
+            </th>
+            <td>
+                {{ data.2 }}
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Clnt Txn Ref
+            </th>
+            <td>
+                {{ data.3 }}
+            </td>
+        </tr>
+
+        <tr  style="display: none;">
+            <th>
+                TPSL Bank Cd
+            </th>
+            <td>
+                {{ data.4 }}
+            </td>
+        </tr>
+
+        <tr  style="display: none;">
+            <th>
+                TPSL Txn Id
+            </th>
+            <td>
+                {{ data.5 }}
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Txn Amt
+            </th>
+            <td>
+                {{ data.6 }}
+            </td>
+        </tr>
+
+        <tr  style="display: none;">
+            <th>
+                Clnt Request Meta
+            </th>
+            <td>
+                {{ data.7 }}
+            </td>
+        </tr>
+
+        <tr  style="display: none;">
+            <th>
+                TPSL Txn Time
+            </th>
+            <td>
+                {{ data.8 }}
+            </td>
+        </tr>
+
+        <tr  style="display: none;">
+            <th>
+                Balance Amt
+            </th>
+            <td>
+                {{ data.9 }}
+            </td>
+        </tr>
+
+        {% if data.10 != "" %}
+            <tr  style="display: none;">
+                <th >
+                    Card Id
+                </th>
+                <td>
+                    {{ data.10 }}
+                </td>
+            </tr>
+        {% endif %}
+
+        <tr  style="display: none;">
+            <th>
+                Alias Name
+            </th>
+            <td>
+                {{ data.11 }}
+            </td>
+        </tr>
+
+        <tr  style="display: none;">
+            <th>
+                Bank Transaction Id
+            </th>
+            <td>
+                {{ data.12 }}
+            </td>
+        </tr>
+
+        {% if data.13 != "" %}
+            <tr  style="display: none;">
+                <th>
+                    Mandate Reg No
+                </th>
+                <td>
+                    {{ data.13 }}
+                </td>
+            </tr>
+        {% endif %}
+
+        <tr  style="display: none;">
+            <th>
+                Token
+            </th>
+            <td>
+                {{ data.14 }}
+            </td>
+        </tr>
+
+<!--        <tr>-->
+<!--            <th>-->
+<!--                Hash-->
+<!--            </th>-->
+<!--            <td>-->
+<!--                {{ data.15 }}-->
+<!--            </td>-->
+<!--        </tr>-->
+    </table>
+    <br><br>
+     </div>
+<!--    {{ full_response }}-->
+<!--    <br><br>-->
+
+<!--    {% if response %}-->
+<!--        <h2>Dual Verification Result</h2>-->
+<!--        <div class="aon-categories-area2-iconbox aon-icon-effect">-->
+<!--        <table border="1" cellpadding="2" cellspacing="2" >-->
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Merchant Code-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.merchantCode }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Merchant Txn Identifier-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.merchantTransactionIdentifier }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Merchant Txn Request Type-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.merchantTransactionRequestType }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Response-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.responseType }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Payment DateTime-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.paymentMethod.paymentTransaction.dateTime }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Amount-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.paymentMethod.paymentTransaction.amount }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Payment Transaction Identifier-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.paymentMethod.paymentTransaction.identifier }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Status Code-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.paymentMethod.paymentTransaction.statusCode }}-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <th>-->
+<!--                    Status Message-->
+<!--                </th>-->
+<!--                <td>-->
+<!--                    {{ response.paymentMethod.paymentTransaction.statusMessage }}-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--            <br><br>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        {{ response }}&ndash;&gt;-->
+<!--    {% endif %}-->
+    <br><br>
+<li style="display: inline-block;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            background-color: #3498db;
+            color: white; /* Added text color style */
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;">
+    <a href="https://www.seamlessonlineservices.com/"style="color:white; text-decoration: none;">Go HOME</a>
+</li>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<div class="row">
+  <a nbButton href="OrderList" status="success" size="small">Back</a>
+</div><br>
+<nb-tabset>
+  <nb-tab tabTitle="Order Information">
+    <form [formGroup]="OrderForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="orderNo">Order Number</label>
+          <input type="text" formControlName="orderNoFormControl" nbInput name="orderNo" placeholder="Auto-generated"
+            readonly/>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="OrderCode">Order Code</label>
+          <input nbInput formControlName="OrderCodeFormControl" name="OrderCode"
+              placeholder="OrderCode" readonly/>
+      </div>
+        <div class="col-md-3">
+          <label for="orderdate">Order Date<span style="color: red;">*</span> &nbsp;&nbsp;</label>
+          <input type="date" formControlName="orderdateFormControl" nbInput name="orderNo" placeholder="Order Date" 
+          [ngClass]="{ 'is-invalid': submitted && f['orderdateFormControl'].errors }" required/>
+          <div *ngIf="submitted && f['orderdateFormControl'].errors" 
+          class="invalid-feedback">
+          <div *ngIf="f['orderdateFormControl'].errors['required']">Order Date is required
+          </div>
+      </div>
+        </div>
+        <div class="col-md-3">
+          <label class="text-capitalize" for="">Order status<span style="color: red;">*</span></label>
+          <select class="form-control text-capitalize" name="orderstatus" formControlName="orderstatusFormControl" (change)="saveOrderStatus()"
+            aria-placeholder="orderstatus" (ngModel)="Order_Status" [ngClass]="{ 'is-invalid': submitted && f['orderstatusFormControl'].errors }" required
+            >
+            <option class="text-capitalize" *ngFor="let item of Order_Status" value="{{item.value}}">
+              {{ item.name }}
+            </option>
+          </select>
+          <div *ngIf="submitted && f['orderstatusFormControl'].errors" 
+          class="invalid-feedback">
+          <div *ngIf="f['orderstatusFormControl'].errors['required']">Order Status is required
+          </div>
+      </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-3">
+          <label for="application_no">Application Number</label>
+          <input type="text" formControlName="applicationnoFormControl" nbInput name="application_no"
+            placeholder="Application Number" />
+        </div>
+        <div class="col-md-3">
+          <label for="customer_name">Customer First Name<span style="color: red;">*</span></label>
+          <input formControlName="customernameFormControl" name="customer_name" class="form-control text-capitalize"
+            (keypress)="open_customer_dialog(customer_dialog)" (click)="open_customer_dialog(customer_dialog)" readonly
+            placeholder="Customer Name" class="form-control" 
+            [ngClass]="{ 'is-invalid': submitted && f['customernameFormControl'].errors }" required/>
+            <div *ngIf="submitted && f['customernameFormControl'].errors" 
+            class="invalid-feedback">
+            <div *ngIf="f['customernameFormControl'].errors['required']">Customer First Name is required
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3">
+          <label for="customer_lastname">Customer Last Name</label>
+          <input type="text" formControlName="lastnameFormControl" nbInput name="last_name" 
+            placeholder="Customer Last Name" />
+        </div>
+        <div class="col-md-3">
+          <label for="email">Email<span style="color: red;">*</span></label>
+          <input class="form-control text-capitalize" type="text" formControlName="emailFormControl" nbInput name="email" 
+            placeholder="Email"  [ngClass]="{ 'is-invalid': submitted && f['emailFormControl'].errors }" required />
+            <div *ngIf="submitted && f['emailFormControl'].errors"
+            class="invalid-feedback">
+            <div *ngIf="f['emailFormControl'].errors['required']">Email is required
+            </div>
+            <div *ngIf="f['emailFormControl'].errors['email']">Email must be a valid
+                Email-Id</div>
+                <div *ngIf="f['emailFormControl'].errors['pattern']">Email must be in Lowercase</div>
+        </div>
+        </div>
+ 
+  </div><hr>
+        <div class="row">
+        <div class="col-md-3">
+          <label for="customer_phone">Customer Phone Number<span style="color: red;">*</span></label>
+          <input type="text" formControlName="customerphoneFormControl" nbInput name="customer_phone" class="form-control text-capitalize"
+            placeholder="Customer Phone"  [ngClass]="{ 'is-invalid': submitted && f['customerphoneFormControl'].errors }" required />
+            <div *ngIf="submitted && f['customerphoneFormControl'].errors" 
+            class="invalid-feedback">
+            <div *ngIf="f['customerphoneFormControl'].errors['required']">Phone Number is required
+            </div>
+            <div *ngIf="f['customerphoneFormControl'].errors['customerphoneFormControl']">Phone Number Must be a valid Phone Number</div>
+            <div  *ngIf="f['customerphoneFormControl'].errors['pattern']">Phone Number length should be of 10 numbers</div>
+        </div>
+        </div>
+        <div class="col-md-3">
+          <label for="adar">Adhar Number<span style="color: red;">*</span></label>
+          <input type="text" formControlName="adarFormControl" nbInput name="Adhar" class="form-control text-capitalize"
+            placeholder="Adhar"  [ngClass]="{ 'is-invalid': submitted && f['adarFormControl'].errors }" required />
+            <div *ngIf="submitted && f['adarFormControl'].errors" 
+            class="invalid-feedback">
+            <div *ngIf="f['adarFormControl'].errors['required']">Adhaar Number is required
+            </div>
+            <div *ngIf="f['adarFormControl'].errors['adarFormControl']">Adhaar Number Must be a valid Adhaar Number</div>
+            <div  *ngIf="f['adarFormControl'].errors['pattern']">Adhaar Number length should be of 12 numbers</div>
+        </div>
+        </div>
+        <div class="col-md-3">
+          <label for="address1">Address Line1<span style="color: red;">*</span></label>
+          <input type="text" formControlName="address1FormControl" nbInput name="address1" class="form-control text-capitalize"
+            placeholder="Address Line1" [ngClass]="{ 'is-invalid': submitted && f['address1FormControl'].errors }" required />
+            <div *ngIf="submitted && f['address1FormControl'].errors" 
+            class="invalid-feedback">
+            <div *ngIf="f['address1FormControl'].errors['required']">Address1 is required
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3">
+          <label for="address2">Address Line2</label>
+          <input type="text" formControlName="address2FormControl" nbInput name="address2"
+            placeholder="Address Line2" />
+        </div>
+        <div class=" col-md-3 mt-3">
+          <label for="active">Active</label>
+          <input type="checkbox" [(ngModel)]="active" [checked]="true" formControlName="orderActivateFormControl"
+            id="active" name="active" />
+        </div>
+      </div><hr>
+        <div class="row">
+        <div class="form-group col-md-3">
+          <label for="stateName">State<span style="color: red;">*</span></label>
+          <select #state style="width: 14em;height:2.5em" class="form-control" nbInput
+          name="stateName" formControlName="stateFormControl" (change)="onChange(state.value)"
+          [ngClass]="{ 'is-invalid': submitted && f['stateFormControl'].errors }" required>
+          <option value="" disabled selected>Please select</option>
+              <option *ngFor="let item of states" [ngValue]="item" >
+                       {{ item}}
+              </option>
+          </select>
+          <div *ngIf="submitted && f['stateFormControl'].errors" 
+          class="invalid-feedback">
+          <div *ngIf="f['stateFormControl'].errors['required']">Please Select State
+          </div>
+      </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="districtName">District <span style="color: red;">*</span></label>
+        <select #district style="width: 14em;height:2.5em" class="form-control" formControlName="districtFormControl" nbInput
+        name="districtName" (change)="onChangecity(district.value)" 
+        [ngClass]="{ 'is-invalid': submitted  && f['districtFormControl'].errors }" required>
+            <option *ngFor="let item of selected_district" [ngValue]="item" >
+                     {{item}}
+            </option> 
+        </select>
+        <!-- <input type="text" formControlName="districtFormControl" nbInput name="pincode" class="form-control text-capitalize"
+          placeholder="Pin Code"   [ngClass]="{ 'is-invalid': submitted && f['districtFormControl'].errors }" required/> -->
+          <div *ngIf="submitted && f['districtFormControl'].errors" 
+          class="invalid-feedback">
+          <div *ngIf="f['districtFormControl'].errors['required']">district is required</div>
+      </div>
+      </div>
+        <div class="col-md-3">
+          <label for="city">City<span style="color: red;">*</span></label>
+          <select #city style="width: 14em;height:2.5em" class="form-control" nbInput
+          name="City" formControlName="cityFormControl" (change)="onChangetaluq(city.value)" 
+          [ngClass]="{ 'is-invalid': submitted && f['cityFormControl'].errors }" required
+        >
+          <!-- <option value="" disabled selected>Please select City</option> -->
+              <option *ngFor="let item of selected_taluq" [ngValue]="item" >
+                       {{ item}}
+              </option>
+          </select>
+          <!-- <input type="text" formControlName="cityFormControl" nbInput name="city" class="form-control text-capitalize"
+            placeholder="City" [ngClass]="{ 'is-invalid': submitted && f['cityFormControl'].errors }" required /> -->
+            <div *ngIf="submitted && f['cityFormControl'].errors" 
+            class="invalid-feedback">
+            <div *ngIf="f['cityFormControl'].errors['required']"> Customer City is Required
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3">
+          <label for="pincode">Pin Code<span style="color: red;">*</span></label>
+          <select style="width: 14em;height:2.5em" class="form-control" nbInput
+                                  name="City" formControlName="pincodeFormControl" 
+                                  [ngClass]="{ 'is-invalid': submitted && f['pincodeFormControl'].errors }" required
+                                >
+                                  <option value="" disabled selected>Please select taluq</option>
+                                      <option *ngFor="let item of selected_taluq_pincode" [ngValue]="item" >
+                                                {{ item}}
+                                      </option>
+                                  </select>
+          <!-- <input type="text" formControlName="pincodeFormControl" nbInput name="pincode" class="form-control text-capitalize"
+            placeholder="Pin Code"   [ngClass]="{ 'is-invalid': submitted && f['pincodeFormControl'].errors }" required/> -->
+            <div *ngIf="submitted && f['pincodeFormControl'].errors" 
+            class="">
+            <div *ngIf="f['pincodeFormControl'].errors['required']" class="validation">PinCode is required
+            </div>
+            <div  *ngIf="f['pincodeFormControl'].errors['minlength']" class="validation">PinCode Must be Minimum 6 Digits</div>
+        </div>
+        </div>
+        <div class="col-md-3">
+          <label for="remarks">Remarks</label>
+          <textarea type="text" formControlName="remarksFormControl" nbInput name="remarks"
+            placeholder="Remarks"></textarea>
+        </div>
+      </div><hr>
+
+      <div class="row">
+        <div class="col-md-3">
+          <label for="service_type">Select Service<span style="color: red;">*</span></label>
+          <input type="text" formControlName="servicetypeFormControl" class="form-control" nbInput name="service_type"
+            placeholder="Service Name" (keypress)="open_service_dialog(service_dialog)" class="form-control text-capitalize"
+            (click)="open_service_dialog(service_dialog)" readonly 
+            [ngClass]="{ 'is-invalid': submitted && f['servicetypeFormControl'].errors }" required/>&nbsp;&nbsp;<br>
+            <div *ngIf="submitted && f['servicetypeFormControl'].errors" 
+            class="invalid-feedback">
+            <div *ngIf="f['servicetypeFormControl'].errors['required']">Please Select Service Type
+            </div>
+        </div>
+            &nbsp;<span><b>Service Amount:{{service_amount}}</b></span>
+        </div>
+        <div class="col-md-3">
+          <label for="dl_number">Dl Number</label>
+          <input type="text" formControlName="dlnumberFormControl" nbInput name="dl_number" placeholder="DL Number" class="form-control text-capitalize"
+        />
+        <!-- [ngClass]="{ 'is-invalid': submitted && f['dlnumberFormControl'].errors }" required -->
+          <!-- <div *ngIf="submitted && f['dlnumberFormControl'].errors" 
+          class="invalid-feedback">
+          <div *ngIf="f['dlnumberFormControl'].errors['required']">Dl Number is Required
+          </div>
+      </div> -->
+        </div>
+        <div class="form-group col-md-3">
+          <label for="additional_charges">Additional Charges</label>
+          <input  type="text" formControlName="addchargeFormControl" nbInput name="additional_charges" [(ngModel)]="additional_amount"
+           placeholder="Additional Charges" (change)="onchange();"/>
+       </div>
+        <div class="col-md-3">
+          <label for="billed_amount">Billed Amount</label>
+          <input type="text" formControlName="billedamountFormControl" nbInput name="billed_amount"
+            placeholder="Billed Amount" readonly/>
+        </div>
+      </div><hr>
+      <div class="row">
+        <span class="aon-sub-title"><b>Required Documents</b>
+        </span>
+        <div>
+            <table class="table table-hover">
+                   <thead>
+                    <th>Document Name</th>
+                    <th>Choose File</th>
+                    <th>download</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of selected_service_list| search_filter:'document_name':searchService">
+                    <td><i class="mr-auto mt-0 mt-lg-0">{{item.document_name}}<span *ngIf="item.is_mandatory" style="color: red;">*</span>:</i></td>
+                    <td><i class="mr-auto mt-0 mt-lg-0">                
+                        <input type="file" requiredFileType="jpg/pdf" id="orderPicture" name="orderPicture" [required]="item.is_mandatory"
+                        [ngModelOptions]="{standalone: true}" class="form-control form-control-sm" (change)="onFileChange($event, item.document_name,item.id);" src={{imgSrc}} accept="image/jpeg,image/png,application/pdf"
+                        value="{{document_name}}"/>
+                      
+                    </i></td>
+                    <!-- <td *ngIf="item.file"><i class="mr-auto mt-0 mt-lg-0"><a href="{{url}}{{item.file}}" target="_blank" *ngIf="item.file">
+                        <label *ngIf="item.file">{{item.document_name}}</label></a></i></td> -->
+                          <a href="{{url}}{{item.file}}" target="_blank" *ngIf="item.file">
+                            <label *ngIf="imgSrcFileExist">{{item.document_name}}</label><br>
+                            <input type="button" value="Download"  *ngIf="imgSrcFileExist" >
+                          </a>
+                        <td><i class="mr-auto mt-0 mt-lg-0"> </i>
+                    
+                        </td>
+                        <td><i class="mr-auto mt-0 mt-lg-0">  <button nbButton (click)="delete_document(item);" status="danger" size="small">X</button> </i></td>
+                </tr>
+                
+              </tbody>
+            </table>
+        </div>
+
+      </div><br>
+      <button nbButton (click)="saveOrder();" [disabled]="submitfile" status="success" type="submit" class="btn">Save</button>
+
+      <button *ngIf="history.length>0" nbButton [hidden]="createFlag"  status="success" type="submit" class="btn history" (click)="orderStatusList()">History</button>
+
+    </form>
+  </nb-tab>
+</nb-tabset>
+<ng-template #customer_dialog let-data let-ref="dialogRef">
+  <nb-card size="medium">
+    <nb-card-header>Customer List<input type="text" nbInput size="small" placeholder="Search .."
+        [(ngModel)]="searchCustomer" /> </nb-card-header>
+    <nb-card-body>
+      <nb-list>
+        <nb-list-item *ngFor="let item of customer_list| search_filter:'customer_name':searchCustomer">
+          <i class="mr-auto mt-2 mt-lg-0">{{item.customer_name}}- <small class="text-compress">{{item.phone_number}}</small></i>
+          <button nbButton (click)="ref.close(item)" size="small">Select</button>
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+<ng-template #service_dialog let-data let-ref="dialogRef">
+  <nb-card size="medium">
+    <nb-card-header>Service List<input type="text" nbInput size="small" placeholder="Search .."
+        [(ngModel)]="searchService" /> </nb-card-header>
+    <nb-card-body>
+      <nb-list>
+        <nb-list-item *ngFor="let item of service_list| search_filter:'service_name':searchService">
+          <i class="mr-auto mt-2 mt-lg-0">{{item.service_name}}
+            <td>{{item.document_name}}</td>
+
+          </i>
+          <button nbButton (click)="ref.close(item)" size="small">Select</button>
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+<div>
+  <nb-card size="large"  *ngIf="order_status_history.length">
+    
+      <nb-card-header>Order Status History</nb-card-header>
+      <nb-card-body>
+        <table class="table table-hover">
+          <thead>
+              <th>Order Number</th>
+              <th>Order Date</th>
+              <th>Order Status</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of order_status_history;" >
+              <td><i class="mr-auto mt-0 mt-lg-0">{{item.order_no}}</i></td>
+              <td><i class="mr-auto mt-2 mt-lg-0">{{item.order_date}}</i></td>
+              <td><i class="mr-auto mt-2 mt-lg-0">{{item.order_status}}</i></td>
+          </tr>
+        </tbody>
+      </table>
+      </nb-card-body>
+  </nb-card>
+</div>

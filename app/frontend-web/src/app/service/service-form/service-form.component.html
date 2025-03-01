@@ -1,0 +1,395 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+    <div class="modal fade" id="myModal"  *ngIf="isAuthenticated">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <div id="overlay"></div>
+            <div class="modal-header">
+              <h4 class="modal-title"><b>RTO Services</b></h4>
+            </div>
+            
+
+            <div class="modal-body">
+              <div>
+                <h6 class="modal-title"><b>Service Name:{{service_name}}</b></h6>
+               <b>{{service_desc}}</b><br>
+               <b><u>Required Documents:</u></b><br>
+               <small>Please upload only .JPG, .PNG or .PDF. Preferably with a file size below 500KB</small>
+
+               <div *ngFor="let item of selected_service_list">
+                <i class="fa fa-arrow-right text-secondary mr-1 "></i><b>{{item.document_name}}</b>
+
+            </div>
+            </div>
+            <form>
+                <div class="flexInsert">
+                    <div class="resizeSelect">
+                        <select #state style="width: 14em;height:2.5em" class="form-control" nbInput (change)="selectChangeHandler($event)"
+                                                name="stateName" formControlName="stateFormControl" (change)="onChange(state.value)"
+                                                [ngClass]="{ 'is-invalid': submitted1 && f['stateFormControl'].errors }" required>
+                                                <option class="aon-bnr2-search-box" value="Select a State Name">Select a State Name</option>
+                                                    <option *ngFor="let item of states" [ngValue]="item"  >
+                                                             {{ item}}
+                                                    </option>
+                                                </select> 
+                        <!-- <select (change)="selectChangeHandler($event)">
+                            <option class="aon-bnr2-search-box" value="Select a State Name">Select a State Name</option>
+                            <option value="Andaman and Nicobar">Andaman and Nicobar</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Pondicherry">Pondicherry</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="UT of DNH and DD">UT of DNH and DD</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="West Bengal">West Bengal</option>
+                        </select> -->
+                    </div>
+
+                    <!-- COLUMNS 3 -->
+                    <div class="submit addBorder">
+                        <button class="" type="submit">
+                            <!-- [routerLink]="['/ServiceShow']" [queryParams]="{'ServiceName':'Vehicle Related Services', 'Select':selectValue}" -->
+                            State
+                        </button>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button  *ngIf="!state_value" type="button" class="btn btn-primary">Please Select State</button>
+              <button *ngIf="state_value" type="button" class="btn btn-primary" data-dismiss="modal"  [routerLink]="['/ServiceForm']"  [queryParams]="{'ServiceName':service_id,'Select':selectValue}">Click Here To Proceed</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+<section class="bg-white aon-categories-area2">
+    <div class="container"> 
+
+
+ <div class="sf-order-form-wrap">
+    <!--Contact Information-->
+    <div class="sf-order-form">
+        <div class="sf-con-form-title text-secondary">
+            <h2 class="m-b30">{{service_name}} Form</h2>
+        </div>
+        
+        <form  [formGroup]="OrderForm" class="aon-login-form">
+               <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <!-- <div class="aon-inputicon-box">  -->
+                        <label for="">Service Type<span style="color: red;">*</span></label>
+                        <select class="form-control text-capitalize" name="payment_type" formControlName="servicetypeFormControl" placeholder="Please select Service Type"
+                        aria-placeholder="service_type"  (change)="change()"  [ngClass]="{ 'is-invalid': submitted1 && f['servicetypeFormControl'].errors }" required
+                        > 
+                        <option value="" disabled selected>select service type</option>
+                      <option class="text-capitalize" *ngFor="let item of service_type" value="{{item.value}}">
+                      {{ item.name }}
+                     </option>
+                     <i class="aon-input-icon fa fa-id-card-o"></i>
+                     </select>
+                     <div *ngIf="submitted1 && f['servicetypeFormControl'].errors" 
+                     class="invalid-feedback">
+                     <div *ngIf="f['servicetypeFormControl'].errors['required']">Service Type is required
+                     </div>
+                 </div>
+
+<!--                             
+                        </div> -->
+                </div>
+                
+                </div> 
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="first_name">First Name<span style="color: red;">*</span></label>
+                        <input class="form-control sf-form-control" formControlName="customernameFormControl" name="First_Name" type="text"
+                         placeholder="First Name"
+                                [ngClass]="{ 'is-invalid': submitted1 && f['customernameFormControl'].errors }" required>
+                                <div *ngIf="submitted1 && f['customernameFormControl'].errors" 
+                                class="invalid-feedback">
+                                <div *ngIf="f['customernameFormControl'].errors['required']">First Name is required
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <!-- <div class="aon-inputicon-box">  -->
+                            <label for="last-name">Last Name</label>
+                            <input class="form-control sf-form-control" formControlName="lastnameFormControl" name="last_name" type="text" placeholder="Last Name">
+                        <!-- </div> -->
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+           
+                            <label for="email">Email-Id<span style="color: red;">*</span></label>
+                            <input class="form-control sf-form-control" formControlName="emailFormControl" name="email" type="text" placeholder="Email"
+                            [ngClass]="{ 'is-invalid': submitted1 && f['emailFormControl'].errors }" required>
+                            <div *ngIf="submitted1 && f['emailFormControl'].errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f['emailFormControl'].errors['required']">Email is required
+                            </div>
+                            <div *ngIf="f['emailFormControl'].errors['email']">Email must be a valid
+                                Email-Id</div>
+                                <div *ngIf="f['emailFormControl'].errors['pattern']">Email must be in Lowercase</div>
+                        </div>
+                            
+                   
+                    </div>
+                    
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <!-- <div class="aon-inputicon-box">  -->
+                            <label for="phonenumber">Phone Number<span style="color: red;">*</span></label>
+                            <input class="form-control sf-form-control" formControlName="customerphoneFormControl" name="phone" type="text"
+                             placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted1 && f['customerphoneFormControl'].errors }" required>
+                             <div *ngIf="submitted1 && f['customerphoneFormControl'].errors" 
+                             class="invalid-feedback">
+                             <span style="color: red;">*</span>
+                             <div *ngIf="f['customerphoneFormControl'].errors['required']">Phone Number is required
+                             </div>
+                             <div *ngIf="f['customerphoneFormControl'].errors['customerphoneFormControl']">Phone Number Must be a valid Phone Number</div>
+                             <div  *ngIf="f['customerphoneFormControl'].errors['pattern']">Phone Number length should be of 10 numbers</div>
+                         </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                            <label for="aadhaar">Aadhaar Number<span style="color: red;">*</span></label>
+                            <input class="form-control sf-form-control" formControlName="adarFormControl" name="adhaar_no" type="number" placeholder="Adhaar Number"
+                            [ngClass]="{ 'is-invalid': submitted1 && f['adarFormControl'].errors }" required>
+                            <div *ngIf="submitted1 && f['adarFormControl'].errors" 
+                            class="invalid-feedback">
+                            <div *ngIf="f['adarFormControl'].errors['required']">Adhaar Number is required
+                            </div>
+                            <div *ngIf="f['adarFormControl'].errors['adarFormControl']">Adhaar Number Must be a valid Adhaar Number</div>
+                            <div  *ngIf="f['adarFormControl'].errors['pattern']">Adhaar Number length should be of 12 numbers</div>
+                        </div>
+                        </div>
+                        </div>
+            </div>
+            <div class="row">
+        
+            </div>
+            <div class="row">
+                            <!-- <div class="form-group">
+                                    <label for="pincode">Pin Code<span style="color: red;">*</span></label>
+                                    <input class="form-control sf-form-control" formControlName="pincodeFormControl" name="pin_code" type="text" placeholder="Pin Code"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f['pincodeFormControl'].errors }" required>
+                                <div *ngIf="submitted1 && f['pincodeFormControl'].errors" 
+                                class="">
+                                <div *ngIf="f['pincodeFormControl'].errors['required']" class="validation">PinCode is required
+                                </div>
+                                <div  *ngIf="f['pincodeFormControl'].errors['minlength']" class="validation">PinCode Must be Minimum 6 Digits</div>
+                            </div>
+                            </div> -->
+                        
+            </div>
+            <div class="row">
+                            <div class="col-md-3">
+                   
+                                <div class="form-group">
+                                    <label for="address1">Address1<span style="color: red;">*</span></label>
+                            
+                                        <input class="form-control sf-form-control" formControlName="address1FormControl" name="address_line1" type="text" placeholder="Address Line 1"
+                                        [ngClass]="{ 'is-invalid': submitted1 && f['address1FormControl'].errors }" required>
+                                        <div *ngIf="submitted1 && f['address1FormControl'].errors" 
+                                        class="invalid-feedback">
+                                        <div *ngIf="f['address1FormControl'].errors['required']">Address1 is required
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <!-- <div class="aon-inputicon-box">  -->
+                                            <label for="Address2">Address2</label>
+                                            <input class="form-control sf-form-control" formControlName="address2FormControl" name="address_line2" type="text" placeholder="Address Line 2"
+                                           >
+                                        <!-- </div> -->
+                                        </div>
+                                    </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="stateName">State<span style="color: red;">*</span></label>
+                                                <select #state style="width: 14em;height:2.5em" class="form-control text-capitalize" nbInput
+                                                name="stateName" formControlName="stateFormControl" (change)="onChange(state.value)"
+                                                [ngClass]="{ 'is-invalid': submitted1 && f['stateFormControl'].errors }" required>
+                                                <option value="" disabled selected>Please select</option>
+                                                    <option *ngFor="let item of states" [ngValue]="item"  >
+                                                             {{ item}}
+                                                    </option>
+                                                </select>  
+                                                <div *ngIf="submitted1 && f['stateFormControl'].errors" 
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['stateFormControl'].errors['required']">Please Select State
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                  
+                                         </div>
+                                       <div class="row">
+                                        <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="district">District<span style="color: red;">*</span></label>
+                                            <select #taluq style="width: 14em;height:2.5em" class="form-control" nbInput
+                                            name="City" formControlName="districtFormControl" (change)="onChangecity(taluq.value)"
+                                            [ngClass]="{ 'is-invalid': submitted1 && f['districtFormControl'].errors }" required
+                                          >
+                                            <option value="" disabled selected>Please select district</option>
+                                                <option *ngFor="let item of selected_district" [ngValue]="item" >
+                                                         {{ item}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted1 && f['districtFormControl'].errors" 
+                                            class="invalid-feedback">
+                                            <div *ngIf="f['districtFormControl'].errors['required']">Please select district
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="City">City<span style="color: red;">*</span></label>
+                                            <select #city style="width: 14em;height:2.5em" class="form-control" nbInput
+                                            name="City" formControlName="cityFormControl" (change)="onChangetaluq(city.value)"
+                                            [ngClass]="{ 'is-invalid': submitted1 && f['cityFormControl'].errors }" required
+                                          >
+                                            <option value="" disabled selected>Please select City</option>
+                                                <option *ngFor="let item of selected_taluq" [ngValue]="item" >
+                                                         {{ item}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted1 && f['cityFormControl'].errors" 
+                                            class="invalid-feedback">
+                                            <div *ngIf="f['cityFormControl'].errors['required']">Please Select City
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="pincode">Pin Code<span style="color: red;">*</span></label>
+                                            <select style="width: 14em;height:2.5em" class="form-control" nbInput
+                                            name="City" formControlName="pincodeFormControl" 
+                                            [ngClass]="{ 'is-invalid': submitted1 && f['pincodeFormControl'].errors }" required>
+                                            <option value="" disabled selected>Please select Pincode</option>
+                                                <option *ngFor="let item of selected_taluq_pincode" [ngValue]="item" >
+                                                         {{ item}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted1 && f['pincodeFormControl'].errors" 
+                                            class="invalid-feedback">
+                                            <div *ngIf="f['pincodeFormControl'].errors['required']">Please Select pincode
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label for="OrderCode">Order Code</label>
+                                            <input  class="form-control sf-form-control" formControlName="OrderCodeFormControl" name="OrderCode"
+                                                placeholder="OrderCode" readonly />
+                                        </div>
+                                        </div>
+                                        <span class="aon-sub-title">Required Documents
+                                        </span>
+                                        <div>
+                                            <table class="table table-hover">
+                                                   <thead>
+                                                    <th>Document Name</th>
+                                                    <th>Choose File</th>
+                                                    <th></th>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let item of selected_service_list">
+                                                    <td><i class="mr-auto mt-0 mt-lg-0">{{item.document_name}}<span *ngIf="item.is_mandatory" style="color: red;">*</span>:</i></td>
+                                                    <td><i class="mr-auto mt-0 mt-lg-0">                
+                                                        <input type="file" id="orderPicture" name="orderPicture" [required]="item.is_mandatory"
+                                                         (change)="onFileChange($event, item.document_name, item.id, item.is_mandatory);" src={{imgSrc}}  accept="image/jpeg,image/png,application/pdf"/>
+                                                    
+                                                    </i></td>
+                                                    <td><i class="mr-auto mt-0 mt-lg-0"> </i>
+                                                    
+                                                    </td>
+                                                    <td *ngIf="item.file"><i class="mr-auto mt-0 mt-lg-0"><a href="{{url}}{{item.file}}" target="_blank" *ngIf="item.file">
+                                                        <label *ngIf="item.file">{{item.document_name}}</label></a></i></td>
+                                                </tr>
+                                                
+                                              </tbody>
+                                            </table>
+                                        </div>
+                                        <div  hidden="true" class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="aon-inputicon-box"> 
+                                                    <input class="form-control sf-form-control" formControlName="activeFormControl" type="checkbox" [(ngModel)]="active" [checked]="true" id="active" name="active">
+                                                </div>
+                                        </div>
+                                        </div>
+                                        <div  hidden="true" class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="aon-inputicon-box"> 
+                                                    <input type="checkbox" [(ngModel)]="is_learner_license" [checked]="false" formControlName="LearnerLicenseFormControl" id="is_learner_license" name="is_learner_license"/>
+                                                </div>
+                                        </div>
+                                        </div>
+                                        <div *ngIf="loader==true"><h6>Please Wait..</h6></div>
+                                       
+                                        <div class="col-md-12">
+                                            <!-- <div class="form-group">
+                                                <button *ngIf="isAuthenticated" [disabled]="submitfile"  class="site-button w-100 btn" (click)="saveCustomer();">Submit <i class="feather-arrow-right"></i> </button>
+                                                <button *ngIf="!isAuthenticated"  class="site-button w-100" data-toggle="modal" data-target="#login-signup-model" >Submit <i class="feather-arrow-right"></i> </button>
+                                            </div> -->
+                                            <div class="form-group">
+                                            <button *ngIf="isAuthenticated" [disabled]="submitfile" type="submit" class="site-button w-100" (click)="saveCustomer();">Submit <i class="feather-arrow-right"></i> </button>
+                                            <button *ngIf="!isAuthenticated" type="submit" class="site-button w-100" data-toggle="modal" data-target="#login-signup-model">Submit <i class="feather-arrow-right"></i> </button>
+                                        </div>
+                                        </div>
+        </form>
+    </div> 
+   </div>
+
+ </div>
+ </section>

@@ -1,0 +1,99 @@
+<!-- <a href="ManageBranchList" nbButton size="small" status="success"> Back to Branch List </a> -->
+<div class="row">
+    <a nbButton href="ManageBranchList" status="success" size="small">Back</a>
+</div><br>
+<nb-tabset>
+    <nb-tab tabTitle="Branch Information">
+
+        <form [formGroup]="branchForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="branchName">Branch Name<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" formControlName="branchNameFormControl" nbInput name="branchName" 
+                    [ngClass]="{ 'is-invalid': submitted && f.branchNameFormControl.errors }" placeholder="Branch Name"/>
+                    <div *ngIf="submitted && f.branchNameFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.branchNameFormControl.errors.required">Branch Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="branchAddress">Branch Address</label>
+                    <textarea formControlName="branchAddressFormControl" nbInput name="branchAddress" placeholder="Branch Address"></textarea>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="branchCity">City &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <input type="text" formControlName="branchCityFormControl" nbInput name="branchCity" placeholder="City"/>
+                </div> 
+                <div class="form-group col-md-3">
+                    <label for="mainBranch">Is Head Office</label>
+                    <input type="checkbox" formControlName="mainBranchFormControl" name="mainBranch" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="branchPinCode">Pin Code</label>
+                    <input type="number" min="0" maxlength="6" (input)="ValidatePinCode($event.target.value,'branchPinCode')" oninput="validity.valid || (value='')" nbInput formControlName="branchPinCodeFormControl" name="branchPinCode" placeholder="Pin Code"/>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="stateCode">State Code</label>
+                    <input id="stateCode"  formControlName="stateCodeFormControl" type="text"  [(ngModel)]="stateCode" placeholder="State Code"
+                         class="form-control"  readonly/>
+    
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="stateName">State<span style="color: red;">*</span></label>
+                    <select style="width: 14em;height:2.5em" class="form-control" nbInput
+                    name="stateName" formControlName="stateNameFormControl"
+                    [ngClass]="{ 'is-invalid': submitted && f.stateNameFormControl.errors }" (change)="onChange()" >
+                        <option *ngFor="let item of state" [ngValue]="item.name" >
+                                 {{ item.name}}
+                        </option>
+                    </select>
+                    <div *ngIf="submitted && f.stateNameFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.stateNameFormControl.errors.required">State Name is required</div>
+                    </div>
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="branchGst">GST Number<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" maxlength="15" minlength="15"  formControlName="gstFormControl" nbInput name="branchGst"
+                    [ngClass]="{ 'is-invalid': submitted && f.gstFormControl.errors }" placeholder="GST Number"/>
+                    <div *ngIf="submitted && f.gstFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.gstFormControl.errors.required">GST NO is required</div>
+                        <div *ngIf="f.gstFormControl.errors.minlength"> Gst no Must Be at least 15 digit</div>
+                    </div>
+                </div>
+
+            <!-- </div><br>
+            <div class="row>"> -->
+                <div class="form-group col-md-3">
+                    <label for="branchPinCode">Pan NO</label>
+                    <input type="text" min="0" maxlength="15" (input)="ValidatePinCode($event.target.value,'branchPanNo')" oninput="validity.valid || (value='')" nbInput formControlName="branchPanNoFormControl" name="branchPanNo" placeholder="Pan No"/>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="branchPinCode">Cin No</label>
+                    <input type="text" min="0" maxlength="50" (input)="ValidatePinCode($event.target.value,'branchCinNo')" oninput="validity.valid || (value='')" nbInput formControlName="branchCinNoFormControl" name="branchCinNo" placeholder="Cin No"/>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="branchPinCode">Email</label><br>
+                    <input type="text"   (input)="ValidatePinCode($event.target.value,'branchEmail')" oninput="validity.valid || (value='')" nbInput formControlName="branchEmailFormControl" name="branchEmail" placeholder="Email"/>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="branchPinCode">Phone No</label>
+                    <input type="number" min="0"  (input)="ValidatePinCode($event.target.value,'branchPhone')" oninput="validity.valid || (value='')" nbInput formControlName="branchPhoneFormControl" name="branchPhone" placeholder="Phone No"/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="branchBankDetails">Bank Details</label>
+                    <textarea class="form-control" formControlName="branchBankDetailsFormControl" name="branchBankDetails" placeholder="Bank Details"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <button nbButton [hidden]="!createFlag"   (click)="saveBranch();" status="success" *ngxPermissionsOnly="['branch.add_branchuser']" type="submit" class="btn">Save</button>&nbsp;&nbsp;
+                    <button nbButton [hidden]="createFlag"   (click)="updateBranch();" status="success" *ngxPermissionsOnly="['branch.change_branchuser']" type="submit" class="btn">Update</button>&nbsp;&nbsp;
+                </div>
+            </div>
+        </form>
+    </nb-tab>
+</nb-tabset>

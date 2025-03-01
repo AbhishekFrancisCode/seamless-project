@@ -1,0 +1,102 @@
+<nb-card accent="info">
+    <nb-card-header>
+     Sub Category
+    </nb-card-header>
+    <nb-card-body>
+        <form id="" [formGroup]="subcategoryFrom" (ngSubmit)="onSubmit()" >
+    
+            <div class="form-row">
+                <div class="form-group col-md-3"> 
+                    <label for="categoryName">Category Name <span style="color: red;">*</span></label>
+                    <input nbInput formControlName="categoryNameFormControl" (keypress)="open(dialog)" (click)="open(dialog)" name="categoryName" placeholder="Category Name" (keypress)="open(dialog)" readonly 
+                    [ngClass]="{ 'is-invalid': submitted && f.categoryNameFormControl.errors }" class="form-control" required/>
+                    <div *ngIf="submitted && f.categoryNameFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.categoryNameFormControl.errors.required">Category Name is required</div>
+                    </div>
+                </div><br>
+                <div class="form-group col-md-3"> 
+                    <label for="subcategoryName">Sub Category Name <span style="color: red;">*</span></label>
+                    <input nbInput formControlName="subcategoryNameFormControl" name="subcategoryName" placeholder="Sub Category Name"
+                    [ngClass]="{ 'is-invalid': submitted && f.subcategoryNameFormControl.errors }" class="form-control"/>
+                    <div *ngIf="submitted && f.subcategoryNameFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.subcategoryNameFormControl.errors.required">Sub Category Name is required</div>
+                    </div> 
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="subDescription">Description <span style="color: red;">*</span></label>
+                    <input nbInput formControlName="subDescription" name="subDescription" placeholder="Sub Category Description"
+                    [ngClass]="{ 'is-invalid': submitted && f.subDescription.errors }" class="form-control"/>
+                    <div *ngIf="submitted && f.subDescription.errors" class="invalid-feedback">
+                        <div *ngIf="f.subDescription.errors.required">Description is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Sequence">Sequence</label>
+                    <input  type="text" formControlName="SequenceFormControl" nbInput name="Sequence" id="Sequence" placeholder="Sequence"
+                    [(ngModel)]="sequence" />
+                   <!-- <div *ngIf="submitted && f.SequenceFormControl.errors" class="invalid-feedback">
+                    <div *ngIf="f.SequenceFormControl.errors.required">Sequence is required</div>
+                    <div *ngIf="f.SequenceFormControl.errors.pattern">Sequence allow Numeric Values Only</div>
+                </div> -->
+                </div>
+            </div><br>
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="form-row">
+            <div class="form-group col-md-4"> 
+                <button nbButton [hidden]="!createFlag" (click)="save_sub_category(); " status="success" type="submit" class="btn">Save</button>
+                <button nbButton [hidden]="createFlag" (click)="update_sub_category();"  status="success" type="submit" class="btn">Update</button>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>
+
+<div>
+    <nb-card size="large">
+        <nb-card-header>Sub Category List <input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchSubCategory" /></nb-card-header>
+        <nb-card-body>
+            <table class="table table-hover">
+                <thead>
+                    <th>Category Name</th>
+                    <th>Sub Category Name</th>
+                    <th>Sub Category Description</th>
+                    <th>Sequence</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subcategory of sub_categories | search_filter:'sub_category_name,sub_category_code,sequence':searchSubCategory ">
+                    <td><i class="mr-auto mt-2 mt-lg-0">{{subcategory.category.category_name }}</i></td>
+                    <td><i class="mr-auto mt-0 mt-lg-0">{{subcategory.sub_category_name}}</i></td>
+                    <td><i class="mr-auto mt-2 mt-lg-0">{{subcategory.description}}</i></td>
+                    <td><i class="mr-auto mt-2 mt-lg-0">{{subcategory.sequence}}</i></td>
+                    <button nbButton size="small" (click)="selected_sub_category(subcategory)">Select</button>
+                </tr>
+                
+              </tbody>
+            </table>
+            <!-- <nb-list-item *ngFor="let subcategory of sub_categories | search_filter:'sub_category_name,sub_category_code':searchSubCategory ">
+                <i class="mr-auto mt-2 mt-lg-0">{{ subcategory.sub_category_name }}-{{ subcategory.category.category_name  }} <small class="text-compress">{{ subcategory.description }}</small></i>
+                <button nbButton size="small" (click)="selected_sub_category(subcategory)" >Select</button>
+              </nb-list-item> -->
+              
+        </nb-card-body>
+    </nb-card>
+</div>
+<ng-template #dialog let-data let-ref="dialogRef" >
+    <nb-card size="large" >
+      <nb-card-header>Category List <input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchCatgory" /> </nb-card-header>
+      <nb-card-body>
+          <table class="table table-hover">
+            <tbody>
+                <tr *ngFor="let item of data | search_filter:'category_name,category_code':searchCatgory " (click)="ref.close(item)">
+                    <td><i class="mr-auto mt-2 mt-lg-0">{{ item.category_name }} - {{item.category_description}}</i></td>              
+                    <td><button nbButton  size="small">Select</button></td>
+                </tr>
+            </tbody>
+        </table>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton (click)="ref.close()">Close</button>
+      </nb-card-footer>
+    </nb-card>
+  </ng-template>

@@ -1,0 +1,191 @@
+<div class="row">
+    <a nbButton href="ServiceList" status="success" size="small">Back</a>
+</div><br>
+<nb-tabset>
+    <nb-tab tabTitle="Service Information">
+        <form [formGroup]="ServiceForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="categoryName">Category Name <span style="color: red;">*</span></label>
+                <input nbInput formControlName="categoryNameFormControl" name="categoryName"
+                    placeholder="Category Name" (keypress)="cat_open(dialog)" (click)="cat_open(dialog)" readonly
+                    [ngClass]="{ 'is-invalid': submitted && f.categoryNameFormControl.errors }" class="form-control"/>
+                    <div *ngIf="submitted && f.categoryNameFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.categoryNameFormControl.errors.required"> Category Name is required</div>
+                    </div>
+            </div><br>
+            <div class="form-group col-md-3">
+                <label for="subcategoryName">Sub Category <span style="color: red;">*</span></label>
+                <input nbInput formControlName="subcategoryNameFormControl" name="subcategoryName"
+                    placeholder="Sub Category Name" (keypress)="sub_open(sub_cat_dialog)"
+                    (click)="sub_open(sub_cat_dialog)" readonly
+                    [ngClass]="{ 'is-invalid': submitted && f.subcategoryNameFormControl.errors }" class="form-control"/>
+                    <div *ngIf="submitted && f.subcategoryNameFormControl.errors" class="invalid-feedback">
+                        <div *ngIf="f.subcategoryNameFormControl.errors.required">Sub Category Name is required</div>
+                    </div>
+            </div><br>
+            <div class="form-group col-md-3">
+                <label for="servicename">Service Name <span style="color: red;">*</span></label>
+                <input nbInput formControlName="serviceFormControl" name="servicename" placeholder="Service Name"
+                [ngClass]="{ 'is-invalid': submitted && f.serviceFormControl.errors }" class="form-control" required/>
+                <div *ngIf="submitted && f.serviceFormControl.errors" class="invalid-feedback">
+                    <div *ngIf="f.serviceFormControl.errors.required">Service Name is required</div>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="servicedescription">Service description</label>
+                <input formControlName="servicedescriptionFormControl" nbInput name="servicedescription" placeholder="Service Description"/>
+            </div>
+            <div class=" form-group col-md-3">
+                <label for="active">Active</label>
+                <input type="checkbox" [(ngModel)]="active" [checked]="true" formControlName="serviceActivateFormControl" id="active" name="active"/>
+            </div>
+            <div class=" form-group col-md-3">
+                <label for="active">Is Learner License Service</label>
+                <input type="checkbox" [(ngModel)]="is_learner_license" [checked]="false" formControlName="LearnerLicenseFormControl" id="is_learner_license" name="is_learner_license"/>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="Sequence">Sequence</label>
+                <input  type="text" formControlName="SequenceFormControl" nbInput name="Sequence" id="Sequence" placeholder="Sequence"
+                [(ngModel)]="sequence"/>
+                <!-- [ngClass]="{ 'is-invalid': submitted && f.SequenceFormControl.errors }" class="form-control"
+               <div *ngIf="submitted && f.SequenceFormControl.errors" class="invalid-feedback">
+                <div *ngIf="f.SequenceFormControl.errors.required">Sequence is required</div>
+                <div *ngIf="f.SequenceFormControl.errors.pattern">Sequence allow Numeric Values Only</div>
+            </div> -->
+            </div>
+        </div>
+            <nb-tabset>
+                <nb-tab tabTitle="Branch Information"><form></form>
+        <table class="table table-hover table-bordered border-dark">
+            <thead class="text-white bg-primary text-center">
+            <th><button  nbButton size="tiny" (click)="add_branch()" status="success">Add Branch</button></th>
+            <th>SI.No</th>
+            <th>Branch Name<span style="color: red;">*</span></th>
+            <th>Service Fee<span style="color: red;">*</span></th>
+            <th>Fee</th></thead>
+            <tbody class=""><tr>
+                <tr *ngFor="let item of Service_Material; let  i = index">
+                <td>
+                    <button nbButton (keydown.enter)="prevent($event)"  (click)="remove_Branch(item);"
+                    status="danger" size="small">X</button>
+                    <td>
+                        <input  style="width: 2em;height:2em" placeholder=""  value={{i+1}} readonly/>
+                    </td>
+                    <td>
+                        <input name=""  size="small" class="form-control form-control-sm text-capitalize"
+                            [(ngModel)]="item.branch_name" [ngModelOptions]="{standalone: true}" type="text"
+                            (keypress)="open_branch_dialog(branch_dialog,item)" 
+                                (click)="open_branch_dialog(branch_dialog,item)" 
+                            type="text" placeholder="Branch Name" readonly
+                        />&nbsp;
+                    </td>
+                    <td>
+                        <input name="" size="small" class="form-control form-control-sm text-capitalize"
+                        [(ngModel)]="item.fee" [ngModelOptions]="{standalone: true}"
+                        placeholder="Service fee" />&nbsp;
+                        <!-- [(ngModel)]="fee" -->
+                    </td>  
+                    <td>
+                        <input name="" size="small" class="form-control form-control-sm text-capitalize"
+                        [(ngModel)]="item.govt_fee" [ngModelOptions]="{standalone: true}" 
+                        placeholder="Fee"/>&nbsp;
+                    </td> 
+            </tr>
+        </table></nb-tab><nb-tab tabTitle="Documentation Information">
+            <table class="table table-hover table-bordered border-dark">
+            <thead class="text-white bg-primary text-center">
+                <th><button  nbButton size="tiny" (click)="add_documents()" status="success">Add Documents</button></th>
+                <th>SI.No</th>
+                <th>Document Name<span style="color: red;">*</span></th>
+                <th>Is Mandatory</th>
+            </thead>
+            <tbody class=""><tr></tr>
+                <tr *ngFor="let item of Service_Materials; let  i = index">
+                    <td>
+                        <button nbButton (keydown.enter)="prevent($event)"  (click)="remove_documents(item);"
+                        status="danger" size="small">X</button>
+                        <td>
+                            <input  style="width: 2em;height:2em" placeholder=""  value={{i+1}} readonly/>
+                        </td>
+                        <td>
+                            <input name=""  size="small" class="form-control form-control-sm text-capitalize"
+                                [(ngModel)]="item.document_name" [ngModelOptions]="{standalone: true}" type="text"
+                                type="text" placeholder="Document Name" 
+                            />&nbsp;
+                        </td>
+                        <td>
+                            <input  type="checkbox" [(ngModel)]="item.is_mandatory" id="is_mandatory" name="is_mandatory" (change)="change();"
+                            [checked]="true" [ngModelOptions]="{standalone: true}" />
+                        <!-- <input type="checkbox" [(ngModel)]="item.is_mandatory" [ngModelOptions]="{standalone: true}" (change)="onchange()"/> -->
+                        </td>
+           </tr>
+            </table></nb-tab></nb-tabset>
+
+    <div>
+        <button nbButton  [hidden]="!createFlag" (click)="saveService();"  status="success" type="submit" class="btn">Save</button>
+    <button nbButton [hidden]="createFlag"   (click)="updateService();" status="success" type="submit" class="btn">Update</button>&nbsp;&nbsp;
+    </div>
+</form>
+        </nb-tab>
+</nb-tabset>
+<ng-template #branch_dialog let-data let-ref="dialogRef" >
+    <nb-card size="medium" >
+      <nb-card-header>Branch Name <input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchBranch" /> </nb-card-header>
+      <nb-card-body>
+          <table>
+            <tbody>
+                <tr *ngFor="let item of branch_list| search_filter:'branch_name':searchBranch" (click)="ref.close(item)">
+                    <td><i class="mr-auto mt-2 mt-lg-0">{{ item.branch_name }}</i></td>
+                       <td><button nbButton (click)="ref.close(item)" size="small">Select</button></td>
+                </tr>
+            </tbody>
+        </table>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton (click)="ref.close()">Close</button>
+      </nb-card-footer>
+    </nb-card>
+</ng-template>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card size="medium">
+        <nb-card-header>Category List <input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchCategory" /></nb-card-header>
+        <nb-card-body>
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="let item of data | search_filter:'category_name,category_code':searchCategory " (click)="ref.close(item)">
+
+                        <td><i class="mr-auto mt-2 mt-lg-0">{{ item.category_name }} - {{item.category_code }}</i></td>              
+                        <td><button nbButton (click)="ref.close(item)" size="small">Select</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton (click)="ref.close()">Close</button>
+        </nb-card-footer>
+     </nb-card>
+</ng-template>
+
+<ng-template #sub_cat_dialog let-data let-ref="dialogRef">
+    <nb-card size="medium">
+        <nb-card-header>Sub Category List<input type="text" nbInput size="small" placeholder="Search .." [(ngModel)]="searchSubCategory" /> </nb-card-header>
+        <nb-card-body>
+            <table class="table table-hover">
+                <tbody>
+
+                    <tr *ngFor="let item of data | search_filter:'sub_category_name,sub_category_code':searchSubCategory " (click)="ref.close(item)">
+
+                        <td><i class="mr-auto mt-2 mt-lg-0">{{ item.sub_category_name }} - {{item.sub_category_code }}</i></td>              
+                        <td><button nbButton (click)="ref.close(item)" size="small">Select</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton (click)="ref.close()">Close</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+

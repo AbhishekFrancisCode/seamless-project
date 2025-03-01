@@ -1,0 +1,38 @@
+button:disabled {
+    opacity: 0.6;
+ }
+ tr{
+    display:table-row;
+}
+
+.flexInsert {
+    display: flex;
+}
+
+.submit button {
+    border: none;
+    background: rgb(255, 217, 0);
+    height: 100%;
+    width: 100%;
+    /* font-weight: 700; */
+    color: #fff;
+}
+
+/* .addBorder { */
+    /* border-left: 1px solid black; */
+/* } */
+
+.resizeSelect select{
+    height: 100%;
+    /* width: 100px; */
+    padding: 1%;
+    margin: 0%;
+    /* font-size: 15px; */
+}
+select {
+    appearance: menulist-button;
+ }
+ .validation {
+    color: red;
+    font-size: 12.8px;
+}

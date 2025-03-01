@@ -1,0 +1,38 @@
+version : '3.7'
+
+services:
+    db:
+        image: mysql:8.0
+        ports:
+          - '3306:3306'
+        environment:
+           MYSQL_DATABASE: 'ST000007_SKD_SIRI'
+           MYSQL_USER: 'root'
+           MYSQL_PASSWORD: 'siri@123'
+           MYSQL_ROOT_PASSWORD: 'root@123'
+
+    erpserver:
+        build:
+            context: .
+        ports:
+            - "8000:8000"
+        volumes:
+            - static_data:/vol/web
+            - ./erpserver:/erpserver
+#        command: sh -c "python manage.py runserver 0.0.0.0:8000"
+        env_file:
+            - ./environment
+        depends_on:
+            - db
+
+    proxy:
+        build:
+            context: ./proxy
+        volumes:
+        -   static_data:/vol/static
+        ports:
+            - "8001:8080"
+        depends_on:
+            -   erpserver
+volumes:
+    static_data:

@@ -1,0 +1,275 @@
+<div class="page-content bg-white">
+
+    <!-- <div class="sf-job-benner sf-overlay-wrapper">
+        <div class="banner-job-row">
+            <div class="sf-overlay-main" style="opacity:0;"></div>
+            <div class="sf-banner-job-heading-wrap">
+                <div class="sf-banner-job-heading-area">
+                    <div class="sf-banner-job-heading-large">Primary Services:</div><br><br>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="section-content mx-5">
+        <div class="sf-banner-job-heading-large" style="display: flex;justify-content: center;">Primary Services</div>
+        <div class="aon-categories-area2-section">
+            {{unique()}}
+            <div class="row justify-content-center">    
+                <div class="col-lg-4 col-md-6"  *ngFor = "let item of primary_service ;" data-toggle="modal" data-target="#myModal">
+                        <div class="media-bg-animate mba-bdr-15">
+                            <div class="aon-categories-area2-iconbox aon-icon-effect">
+                                <div>
+                                    {{item.category_name}}
+                                    <br>
+                                    <hr>
+                     
+                                    <form>
+                                        <div class="flexInsert">                          
+                                            <div class="submit addBorder">
+                                                <button class="" type="submit"
+                                                [routerLink]="['/ServiceShow']" [queryParams]="{'ServiceName':item.category_name, 'Select':selectValue}">
+                                                GO
+                                                </button>
+                           
+                                            </div>
+                                        </div>
+                                    </form>
+                         
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            {{reset()}}
+        </div>
+    </div>
+    
+    <!-- <div class="section-content ">
+    
+        <div class="container">
+    
+            <div class="sf-job-details-fileds sf-job-details-fileds-two">
+                <ul class="job-listing-meta meta">
+                    <li class="location">
+                        <div class="aon-categories-area2-section">
+                            {{unique()}}
+                            <div class="row justify-content-center">
+                                <div *ngIf="DLRS" class="col-12" data-toggle="modal" data-target="#myModal">
+                                    <div class="media-bg-animate mba-bdr-15">
+                                        <div class="aon-categories-area2-iconbox aon-icon-effect">
+                                            <div>
+                                                Driving License Related Services
+                                                <br>
+                                                <hr>
+                                                <form>
+                                                    <div class="flexInsert">
+                                                        <div class="resizeSelect">
+                                                 
+                                                        </div>
+
+                                                 
+                                                        <div class="submit addBorder">
+                                                            <button class="" type="submit"
+                                                                [routerLink]="['/ServiceShow']"
+                                                                [queryParams]="{'ServiceName':'Driving License Related Services', 'Select':selectValue}">
+                                                                GO
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                         
+                                            </div>
+                                     
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                         
+                        </div>
+           
+                    </li>
+                    <li>
+                        <div>
+                            <img src="../../../assets/images/SOS.jpg" alt="">
+                        </div>
+                    </li>
+                    <li class="location">
+                        <div class="aon-categories-area2-section">
+
+
+                            <div class="row justify-content-center">
+                                <div *ngIf="VRS" class="col-12" data-toggle="modal" data-target="#myModal">
+
+                                    <div class="media-bg-animate mba-bdr-15">
+                                        <div class="aon-categories-area2-iconbox aon-icon-effect">
+
+                                            <div>
+
+                                                Vehicle Related Services
+                                                <br>
+                                                <hr>
+
+                                                <form>
+                                                    <div class="flexInsert">
+
+
+                                            
+                                                        <div class="submit addBorder">
+                                                            <button class="" type="submit"
+                                                                [routerLink]="['/ServiceShow']"
+                                                                [queryParams]="{'ServiceName':'Vehicle Related Services', 'Select':selectValue}">
+                                                                GO
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+       
+        </div>
+    </div> -->
+
+    <!-- <div class="sf-job-benner sf-overlay-wrapper">
+        <div class="banner-job-row">
+            <div class="sf-overlay-main" style="opacity:0;"></div>
+            <div class="sf-banner-job-heading-wrap">
+                <div class="sf-banner-job-heading-area">
+                    <div class="sf-banner-job-heading-large">We also offer our services in the following areas:</div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="section-content mx-5">
+        <div class="sf-banner-job-heading-large" style="display: flex;justify-content: center;">We also offer our services in the following areas:</div>
+        <div class="aon-categories-area2-section">
+            {{unique()}}
+            <div class="row justify-content-center">    
+                <div class="col-lg-4 col-md-6"  *ngFor = "let item of secondary_service  ;" data-toggle="modal" data-target="#myModal">
+                        <div class="media-bg-animate mba-bdr-15">
+                            <div class="aon-categories-area2-iconbox aon-icon-effect">
+                                <div>
+                                    {{item.category_name}}
+                                    <br>
+                                    <hr>
+                     
+                                    <form>
+                                        <div class="flexInsert">                          
+                                            <div class="submit addBorder">
+                                                <button id='contact1' class="" type="submit"
+                                                [routerLink]="['/contact']" [queryParams]="{'ServiceName':item.category_name, 'Select':selectValue,'id': 'contact1'}">
+                                                GO
+                                                </button>
+                           
+                                            </div>
+                                        </div>
+                                    </form>
+                         
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            {{reset()}}
+        </div>
+    </div>
+    <!-- <div class="section-content ">
+        <div class="container">
+            <div class="sf-job-details-fileds sf-job-details-fileds-two">
+
+                <ul class="job-listing-meta meta">
+                    <li class="location">
+                        <div class="aon-categories-area2-section">
+
+                            <div class="row justify-content-center" *ngFor="let item of other_category; let i=index">
+
+                                <div *ngIf="i%2==0" class="col-12" data-toggle="modal" data-target="#myModal">
+                                    <div class="media-bg-animate mba-bdr-15">
+                                        <div class="aon-categories-area2-iconbox aon-icon-effect">
+
+                                            <div>
+                                                {{item.category_name}}
+                                                <br>
+                                                <hr>
+                                                <form>
+                                                    <div class="flexInsert">
+
+                                                        <div class="submit addBorder">
+                                                            <button class="" type="submit"
+                                                                [routerLink]="['/ServiceShow']"
+                                                                [queryParams]="{'ServiceName':item.category_name, 'Select':selectValue}">
+                                                                GO
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </li>
+                    <li class="location">
+                    </li>
+                    <li class="location">
+                        <div class="aon-categories-area2-section">
+
+                            <div class="row justify-content-center" *ngFor="let item of other_category; let i=index">
+                                <div *ngIf="i%2==1" class="col-12" data-toggle="modal" data-target="#myModal">
+
+                                    <div class="media-bg-animate mba-bdr-15">
+                                        <div class="aon-categories-area2-iconbox aon-icon-effect">
+
+                                            <div>
+
+                                                {{item.category_name}}
+                                                <br>
+                                                <hr>
+
+                                                <form>
+                                                    <div class="flexInsert">
+                                                        <div class="submit addBorder">
+                                                            <button class="" type="submit"
+                                                                [routerLink]="['/ServiceShow']"
+                                                                [queryParams]="{'ServiceName':item.category_name, 'Select':selectValue}">
+                                                                GO
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {{reset()}}
+                        </div>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div> -->
+
+
+</div>

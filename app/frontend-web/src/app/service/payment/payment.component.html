@@ -1,0 +1,134 @@
+<section class="bg-white aon-categories-area2">
+    <div class="container">
+        <div class="section-head">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <span class="aon-sub-title"></span>
+                    <h3 class="sf-title">Thank you choosing the {{service_name}}, Please complete the payment </h3>
+                </div>
+
+            </div>
+        </div>
+        <div class="section-content">
+
+            <div class="tab-pane">
+                <div class="sf-tabs-content">
+                    <form [formGroup]="PaymentForm" class="aon-login-form">
+
+                        <!-- <div class="col-lg-4 col-md-6"> -->
+                            <div class="col-lg-10 col-md-10">
+                      
+                            <div class="media-bg-animate mba-bdr-15">
+
+                                <div class="aon-categories-area2-iconbox aon-icon-effect">
+
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <h4>Customer Information</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>First Name:</b></td>
+                                            <td><b>{{customer_name}}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Last Name :</b></td>
+                                            <td>
+                                            <b>{{lastname}}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Phone Number :</b></td>
+                                            <td>
+                                            <b> {{phone_number}}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Email :</b></td>
+                                            <td><b>{{email}}</b></td>
+                                        </tr>
+
+                                    </table>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-4 col-md-6"> -->
+                            <div  class="col-lg-10 col-md-10">
+                            <div class="media-bg-animate mba-bdr-15">
+
+                                <div class="aon-categories-area2-iconbox aon-icon-effect">
+
+                                    <br>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <h4>Service and Payment Information</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Service Name :</b></td>
+                                            <td><b>{{service_name}}</b></td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td><b>Government Fee :</b></td>
+                                            <td><b>{{govt_fee}}</b></td>
+                                        </tr> -->
+                                        <tr>
+                                            <td><b>Processing Fee :</b></td>
+                                            <td><b>{{amt}}</b></td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td><b>Service Name :</b></td>
+                                            <td><b>{{service_name}}</b></td>
+                                        </tr> -->
+                                        <tr>
+                                            <td><b>Total Amount:</b></td>
+                                            <td><b>Rs:{{amt}}/-</b></td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>
+                                                <div>
+                                                    <label class="text-capitalize" for=""><h4>Payment Type</h4></label>  </td>
+                                                 <td style="width:300px;" ><select class="form-control text-capitalize" name="payment_type" formControlName="paymentTypeFormControl"
+                                                   aria-placeholder="payment_type" (ngModel)="Payment_Type">
+                                                 <option class="text-capitalize" *ngFor="let item of Payment_Type" value="{{item.value}}">
+                                                 {{ item.name }}
+                                                </option>
+                                                </select>
+                                            </td>
+                                              </div>
+                                          
+                                        </tr> -->
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row m-3">
+                                <div class="form-check" *ngIf="is_learner_license">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" [(ngModel)]="termsChecked" (change)="checkValue($event)" type="checkbox" value=""> Once the Application is generated, the Self Test has to be taken by the Applicant through Parivahan link  as per the Credentials received on Registered Mobile Number <span
+                                    class="form-check-sign"></span>
+                                </label>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="site-button w-100" (click)="savePayment();" >Proceed to Payment <i
+                                    class="feather-arrow-right"></i> </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

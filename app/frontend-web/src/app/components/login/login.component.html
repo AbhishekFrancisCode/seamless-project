@@ -1,0 +1,295 @@
+<!-- Login Sign Up Modal -->
+<div class="modal fade" id="login-signup-model"> 
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close aon-login-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <div class="modal-body">
+
+                <div class="sf-custom-tabs sf-custom-new aon-logon-sign-area p-3">
+                    <ul class="nav nav-tabs nav-table-cell">
+                        <li><a data-toggle="tab" href="#Upcoming" class="active">Login</a></li>
+                        <li><a data-toggle="tab" href="#Past">Sign up</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <div id="Upcoming" class="tab-pane active">
+                            <div class="sf-tabs-content">
+                                <form [formGroup]="loginForm" class="aon-login-form">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Username<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <input class="form-control sf-form-control" name="username"
+                                                        formControlName="username" type="text" placeholder="User Name" 
+                                                        [class.is-invalid]="!username.valid && submitted">
+                                                        <i class="aon-input-icon fa fa-user"></i>
+                                                         
+                                                </div>
+                                                <div *ngIf="username.invalid && submitted">
+                                                    <div *ngIf="username.errors?.required" class="validation">User Name is required</div>
+                                                    <div *ngIf="username.errors?.pattern" class="validation">Should be valid User Email-Id </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Password<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    
+                                                    <input class="form-control sf-form-control" name="password"
+                                                        formControlName="loginpassword" type="password" required
+                                                        placeholder="Password"  [class.is-invalid]="!loginpassword.valid && submitted">
+                                                    <i class="aon-input-icon fa fa-lock"></i>
+                                                    <div *ngIf="loginpassword.invalid && submitted">
+
+                                                        <div *ngIf="loginpassword.errors?.required" class="validation">Password is required</div>
+                                                        <div *ngIf="loginpassword.errors?.minlength" class="validation">Password length should be of 6 numbers</div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group d-flex aon-login-option justify-content-between">
+                                                <!-- <div class="aon-login-opleft">
+                                                    <div class="checkbox sf-radio-checkbox">
+                                                        <input id="td2_2" name="abc" value="five" type="checkbox"
+                                                        class="form-control sf-form-control" formControlName="activeformcontrol">
+                                                        <label for="td2_2">Keep me logged In</label>
+                                                    </div>
+                                                </div> -->
+                                                <div class="aon-login-opright">
+                                                    <!-- <button mat-raised-button  type="submit" class="btn btn-danger" [disabled]="">Login</button>&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                                    <!-- {{forgot_password_like}} -->
+                                                    <a href="{{forgot_password_like}}">Forgot Password</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button (click)="login();" class="site-button w-100" type="submit">Submit <i
+                                                    class="feather-arrow-right"></i> </button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="Past" class="tab-pane">
+                            <div class="sf-tabs-content">
+                                <form [formGroup]="userRegisterForm" class="aon-login-form">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Category<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <select class="form-control text-capitalize" name="categories" aria-placeholder="categories"
+                                                        formControlName="categories" placeholder="categories" required  (change)="onChange()"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['categories'].errors }">
+                                                        <option value="" disabled selected hidden>Please Select User Category<option></option>
+                                                        <option class="text-capitalize" *ngFor="let item of categories" value="{{item.value}}">
+                                                            {{ item.name }}
+                                                        </option></select>
+                                                        <i class="aon-input-icon fa fa-id-card-o"></i>
+                                                    <div *ngIf="submitted && f['categories'].errors"
+                                                    class="invalid-feedback">
+
+                                                    <div *ngIf="f['categories'].errors['required']">Category is required
+
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group" *ngIf="show">
+                                                    <label for="">Sub Categories<span style="color: red;">*</span></label>
+                                                    <div class="aon-inputicon-box">
+                                                        <input class="form-control sf-form-control" name="subcategories"
+                                                            formControlName="subcategories" type="text"
+                                                            placeholder="Sub Categories"  
+                                                            [ngClass]="{'is-invalid': submitted && f['subcategories'].errors }"/>
+                                                            <div *ngIf="submitted && f['subcategories'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="f['first_name'].errors['required']">Sub category is required
+                                                            </div>
+                                                        </div>
+                                                        <i class="aon-input-icon fa fa-id-card-o"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">First Name<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <input class="form-control sf-form-control" name="first_name"
+                                                        formControlName="first_name" type="text"
+                                                        placeholder="First Name" required
+                                                        [ngClass]="{'is-invalid': submitted && f['first_name'].errors }">
+                                                        <div *ngIf="submitted && f['first_name'].errors"
+                                                        class="invalid-feedback">
+
+                                                        <div *ngIf="f['first_name'].errors['required']">First Name is required
+                                                        </div>
+                                                        <div *ngIf="f['first_name'].errors['minlength']">First Name length should be atleast 3 characters</div>
+                                                    </div>
+                                                    <i class="aon-input-icon fa fa-user"></i>
+                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Last Name<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <input class="form-control sf-form-control" name="last_name"
+                                                        formControlName="last_name" type="text" placeholder="Last Name" required
+                                                        [ngClass]="{ 'is-invalid': submitted && f['last_name'].errors }">
+                                                    <i class="aon-input-icon fa fa-user"></i>
+                                                    <div *ngIf="submitted && f['last_name'].errors"
+                                                    class="invalid-feedback">
+
+                                                    <div *ngIf="f['last_name'].errors['required']">Last Name is required
+
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <!-- <div class="row"> -->
+                                            <!-- <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="aon-inputicon-box">
+                                                    <select class="form-control sf-form-control" name="categories" aria-placeholder="categories"
+                                                        formControlName="categories" placeholder="categories" required [(ngModel)]="defaultcategory"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['categories'].errors }">
+                                                        <option class="text-capitalize" *ngFor="let item of categories" value="{{item.value}}">
+                                                            {{ item.name }}
+                                                        </option></select>
+                                                    <div *ngIf="submitted && f['categories'].errors"
+                                                    class="invalid-feedback">
+
+                                                    <div *ngIf="f['categories'].errors['required']">categories are required
+
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Phone Number<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <input class="form-control sf-form-control" name="Phone"
+                                                        formControlName="phone_number" type="tel" placeholder="Phone" required
+                                                        [ngClass]="{ 'is-invalid': submitted && f['phone_number'].errors }">
+                                                        <i class="aon-input-icon fa fa-phone"></i>
+                                                <div *ngIf="submitted && f['phone_number'].errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['phone_number'].errors['required']">Phone Number is required
+
+                                                </div>
+                                                <div *ngIf="f['phone_number'].errors['pattern']">Phone Number length should be of 10 numbers</div>
+                                            </div>
+                                        </div>
+                                      
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Email-Id<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <input class="form-control sf-form-control" name="email"
+                                                        formControlName="email" type="email" placeholder="Email" required
+                                                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                                                    <i class="aon-input-icon fa fa-envelope-o"></i>
+                                                    <div *ngIf="submitted && f['email'].errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f['email'].errors['required']">Email is required
+                                                        </div>
+                                                        <div *ngIf="f['email'].errors['email']">Email must be a valid
+                                                            Email-Id</div>
+                                                            <div *ngIf="f['email'].errors['pattern']">Email must be in Lowercase</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Password<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <input class="form-control sf-form-control" name="password" 
+                                                        formControlName="password" type="password"  placeholder=" Create Password"
+                                                        required
+                                                        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                                    <i class="aon-input-icon fa fa-user"></i>
+                                                    <div *ngIf="submitted && f['password'].errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="f['password'].errors['required']">Password is required
+                                                    </div>
+                                                    <div *ngIf="f['password'].errors['password']">Password be a valid
+                                                        password</div>
+                                                    <div *ngIf="f['password'].errors['minlength']">password length should be of 6 numbers</div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Confirm Password<span style="color: red;">*</span></label>
+                                                <div class="aon-inputicon-box">
+                                                    <input class="form-control sf-form-control" name="confirmpassword" 
+                                                        formControlName="confirmpassword" type="password" required 
+                                                        placeholder="Confirm Password" [class.is-invalid]="confirmpassword.invalid && confirmpassword.touched || !password_value" onchange="passwordMatchValidator()">
+                                                    <i class="aon-input-icon fa fa-user"></i>
+                                                    <div *ngIf="confirmpassword.invalid && confirmpassword.touched">
+
+                                                        <div *ngIf="confirmpassword.errors?.required" class="validation">confirmpassword is required</div>
+                                                        <div *ngIf="confirmpassword.errors?.minlength" class="validation">confirmpassword length should be of 6 numbers</div>
+
+                                                        <div *ngIf="!password_value" class="validation">Password and confirm password is not matching</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group sign-term-con">
+                                                <div class="checkbox sf-radio-checkbox">
+                                                    <input id="td33" name="abc" value="five" class="form-control sf-form-control" formControlName="activeformcontrol"
+                                                     type="checkbox" required   [ngClass]="{ 'is-invalid': submitted && f['activeformcontrol'].errors }"/>    
+                                                    <label for="td33">I've read and agree with your <a href="/privacy">Privacy
+                                                            Policy</a> and <a href="/terms">Terms & Conditions</a> and <a href="/refund">Cancellation & Refund Policies</a> </label>
+                                                            <div *ngIf="submitted && f['activeformcontrol'].errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="f['activeformcontrol'].errors['required']">Please Accept Terms And Conditions
+                                                </div>
+                                            </div>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="button" (click)="registerUser();"
+                                                class="site-button w-100">Submit <i class="feather-arrow-right"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Sign Up Modal -->

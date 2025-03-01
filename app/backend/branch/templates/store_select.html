@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="testimonial py-5" id="testimonial">
+    <div>
+        <form id="store_select_list" action="{% url 'store_select' %}" method="post">
+            {% csrf_token %}
+            <div class="container shadow bg-white rounded">
+            <table class="table table-hover">
+            {% for store in branch_list_object %}
+                <tr onclick="document.getElementById('store_select_list').submit()" >
+                    <td>
+                        {{ store.store__branch_name }}
+                        <input type="hidden" name="branch_id" id="branch_id" value="{{store.branch_id}}">
+                        <input type="hidden" name="branch_name" id="branch_name" value="{{store.store__branch_name}}">
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+{% endblock %}

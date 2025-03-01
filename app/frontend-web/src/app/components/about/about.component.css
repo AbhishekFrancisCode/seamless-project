@@ -1,0 +1,10 @@
+.backgroundImage {
+    background-image: url("/assets/images/banner/job-banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition-delay: 0.4s;
+}
+
+p {
+    text-align: justify;
+}

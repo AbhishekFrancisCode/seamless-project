@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Transaction Page</title>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1" />
+    <script src="https://www.paynimo.com/paynimocheckout/client/lib/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://www.paynimo.com/Paynimocheckout/server/lib/checkout.js"></script>
+    <script src="{% static 'js/online_transaction.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            if ($("#siDetailsAtMerchantEndCond").val() == "true") {
+                var amount = "{{ config_data.amountType }}";  {# Use dot notation here #}
+                $("#amountType").val(amount);
+                var freq = "{{ config_data.frequency }}";  {# Use dot notation here #}
+                $("#frequency").val(freq);
+                $("#debitStartDate").val("{{ start_date }}");
+                $("#debitEndDate").val("{{ end_date }}");
+                $("#amount").change(function () {
+                    $("#maxAmount").val($(this).val() * 2);
+                });
+            }
+        });
+    </script>
+</head>
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 20px;
+        }
+    .aon-categories-area2-iconbox {
+        border: 1px solid #ea1818;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(214 240 5);
+            margin: 20px;
+            width: 40%;
+        }
+        h1 {
+            color:  #32a9cb;
+        }
+
+  table {
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+            word-wrap: break-word; /* Enable word wrapping */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            width: 200px; /* Set the width for th */
+        }
+
+        td {
+            width: 300px; /* Set the width for td */
+
+        }
+    input[readonly] {
+        border: none;
+    }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        .color {
+            background-color: #f2f2f2;
+            font-size: 15px; /* Corrected typo: 'font sixe' to 'font-size' */
+            font-weight: bold; /* Added font weight for bold text */
+        }
+    </style>
+<body>
+    <h1>Online Transaction</h1>
+    <form method="POST" action="" id="form">
+         <input type="hidden" name="crf_token" value="{{ csrf_token }}">
+             <div class="aon-categories-area2-iconbox aon-icon-effect">
+        <table id="worldline_merchant_table" border="1" cellpadding="2" cellspacing="0">
+                   <tr style="display: none;">
+                    <td class="color">{{ form.merchantCode.label }}</td>
+                    <td><input type="text" name="{{ form.merchantCode.name }}" value="{{ form.merchantCode.value }}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="color">{{ form.txn_id.label }}</td>
+                    <td><input type="text" name="{{ form.txn_id.name }}" value="{{ form.txn_id.value }}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="color">{{ form.amount.label }}</td>
+                    <td><input type="text" name="{{ form.amount.name }}" value="{{ form.amount.value }}" readonly></td>
+                </tr>
+                <tr style="display: none;">
+                    <td class="color">{{ form.merchantSchemeCode.label }}</td>
+                    <td><input type="text" name="{{ form.merchantSchemeCode.name }}" value="{{ form.merchantSchemeCode.value }}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="color">{{ form.custID.label }}</td>
+                    <td><input type="text" name="{{ form.custID.name }}" value="{{ form.custID.value }}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="color">{{ form.mobNo.label }}</td>
+                    <td><input type="text" name="{{ form.mobNo.name }}" value="{{ form.mobNo.value }}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="color">{{ form.email.label }}</td>
+                    <td><input type="text" name="{{ form.email.name }}" value="{{ form.email.value }}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="color">{{ form.customerName.label }}</td>
+                    <td><input type="text" name="{{ form.customerName.name }}" value="{{ form.customerName.value }}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="color">{{ form.currency.label }}</td>
+                    <td><input type="text" name="{{ form.currency.name }}" value="{{ form.currency.value }}" readonly></td>
+                </tr>
+                <tr style="display: none;">
+                    <td class="color">{{ form.SALT.label }}</td>
+                    <td><input type="text" name="{{ form.SALT.name }}" value="{{ form.SALT.value }}" readonly></td>
+                </tr>
+                <tr style="display: none;">
+                    <td class="color">{{ form.returnUrl.label }}</td>
+                    <td><input type="text" name="{{ form.returnUrl.name }}" value="{{ form.returnUrl.value }}" readonly></td>
+                </tr >
+                <tr style="display: none;">
+                    <td>{{ form.cardNumber.label }}</td>
+                    <td><input type="text" name="{{ form.cardNumber.name }}" value="{{ form.cardNumber.value }}" readonly></td>
+                </tr>
+                <tr style="display: none;">
+                    <td>{{ form.expMonth.label }}</td>
+                    <td><input type="text" name="{{ form.expMonth.name }}" value="{{ form.expMonth.value }}" readonly></td>
+                </tr>
+                <tr style="display: none;">
+                    <td>{{ form.expYear.label }}</td>
+                    <td><input type="text" name="{{ form.expYear.name }}" value="{{ form.expYear.value }}" readonly></td>
+                </tr>
+                <tr style="display: none;">
+                    <td>{{ form.cvvCode.label }}</td>
+                    <td><input type="text" name="{{ form.cvvCode.name }}" value="{{ form.cvvCode.value }}" readonly></td>
+                </tr>
+                <tr style="display: none;">
+                    <td>{{ form.siDetailsAtMerchantEndCond.label }}</td>
+                    <td><input type="text" name="{{ form.siDetailsAtMerchantEndCond.name }}" value="{{ form.siDetailsAtMerchantEndCond.value }}" readonly></td>
+                </tr>
+        </table>
+             </div>
+     <input type="submit" style="display: inline-block; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); padding: 10px; background-color: #3498db; color: #fff; border: none; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 4px;" value="Submit" class="site-button w-100" style="display: inline-block; /* Other inline styles here */" id="submit" name="submit">
+        <div id="worldline_embeded_popup"></div>
+    </form>
+</body>
+</html>

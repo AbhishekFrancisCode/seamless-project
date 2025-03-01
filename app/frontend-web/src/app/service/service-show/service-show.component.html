@@ -1,0 +1,43 @@
+<div class="section-content mx-5">
+    <div class="aon-categories-area2-section">
+        <div class="sf-banner-job-heading-large" style="display: flex;justify-content: center;">{{service_category_name}}</div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6" *ngFor="let item of category_service_list;" data-toggle="modal" data-target="#myModal">
+                <div class="media-bg-animate mba-bdr-15">
+                    <div class="aon-categories-area2-iconbox aon-icon-effect">
+                        <div>
+                            {{item.sub_category_name}}
+                            <br>
+                            <hr>
+                            <form>
+                                <div class="flexInsert">
+                                    <div class="resizeSelect">
+                                        <select #service (change)="service_cat(service.value)">
+                                            <option class="aon-bnr2-search-box">Select a Service Name</option>
+                                            <option *ngFor="let service of item.service_list2"
+                                                value="{{service.id}}">{{service.service_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="submit addBorder">
+                                        <button class="" type="submit" *ngIf="isAuthenticated"
+                                            [routerLink]="['/ServiceForm']"
+                                            [queryParams]="{'ServiceName':service_id, 'State': stateValue}">
+                                            GO
+                                        </button>
+                                        <button class="" type="submit" *ngIf="!isAuthenticated"
+                                            [routerLink]="['/ServiceForm']" data-toggle="modal"
+                                            data-target="#login-signup-model"
+                                            [queryParams]="{'ServiceName':service_id, 'State': stateValue}">
+                                            GO
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

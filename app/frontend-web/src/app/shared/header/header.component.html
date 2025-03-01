@@ -1,0 +1,107 @@
+<!-- <div class="loading-area">
+    <div class="loading-box"></div>
+    <div class="loading-pic">
+        <div class="windows8">
+            <div class="wBall" id="wBall_1">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_2">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_3">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_4">
+                <div class="wInnerBall"></div>
+            </div>
+            <div class="wBall" id="wBall_5">
+                <div class="wInnerBall"></div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="page-wraper">
+<header class="site-header header-style-2 mobile-sider-drawer-menu header-full-width">
+    <div class="sticky-header main-bar-wraper  navbar-expand-lg">
+      <div class="main-bar">
+
+      <div class="container clearfix" style="width: 100vw">
+
+          <div class="logo-header">
+              <div class="logo-header-inner logo-header-one">
+                <a href="index.html">
+                    <img src="../../../assets/images/RDlogo-dark.png" alt="RTOManagementServices">
+                </a>
+              </div>
+          </div>
+
+          <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button" class="navbar-toggler collapsed">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar icon-bar-first"></span>
+              <span class="icon-bar icon-bar-two"></span>
+              <span class="icon-bar icon-bar-three"></span>
+          </button>
+
+
+          <div class="nav-animation header-nav navbar-collapse collapse d-flex justify-content-start">
+
+              <ul class=" nav navbar-nav">
+                <li class="has-child current-menu-item"><a href="javascript:;" href="index.html">Home</a>
+                </li>
+                <li class="has-child">
+                    <a href="javascript:;">About Us</a>
+                    <ul class="sub-menu">
+                        <li><a routerLink="about">Company Story</a></li>
+                        <li><a routerLink="vision">Vision</a></li>
+                        <li><a routerLink="/team">Team Profile</a></li>
+                        <!-- <li><a href="index.html">Advisory Panel</a></li> -->
+                    </ul>
+                </li>
+                <li class="has-child">
+                    <a href="javascript:;">Our Services</a>
+                    <ul class="sub-menu">
+                        <li><a href="ServiceList">RTO Related Services</a></li>
+                        <!-- <li><a href="information.html">Informative Services</a></li> -->
+                    </ul>  
+                </li>
+
+                <li class="has-child"><a href="javascript:;">Careers</a>
+                    <ul class="sub-menu">
+                        <li><a routerLink="/jobdetails">Job Openings</a></li>
+                    </ul>
+                </li>
+                <!-- <li><a [routerlink]="\contact">Contact</a></li>   -->
+                <li><a routerLink="/contact">Contact</a></li>
+                <li class="has-child"><a href="javascript:;">Terms & Policies</a>
+                    <ul class="sub-menu">
+                        <li><a routerLink="/terms">Terms & Conditions</a></li>
+                        <li><a routerLink="/privacy">Privacy Policies</a></li>
+                        <li><a routerLink="/refund">Cancellation & Refund Policies</a></li>
+                    </ul>
+                </li>
+              </ul>
+
+          </div>
+
+          <div class="extra-nav header-2-nav">
+                      <div class="extra-cell" *ngIf="!isAuthenticated">
+                          <button type="button" class="site-button aon-btn-login" data-toggle="modal" data-target="#login-signup-model">
+                              <i class="fa fa-user"></i> Login
+                          </button>
+                      </div>
+                      <div class="extra-cell" *ngIf="isAuthenticated">
+                        <button type="button" class="site-button aon-btn-login" >
+                            <i class="fa fa-user"></i> {{first_name}}
+                        </button> &nbsp;
+                        <button type="button" (click)="logOutUser();" class="site-button aon-btn-login" >
+                            <i class="fa fa-sign-out"></i> Logout
+                        </button>
+                    </div>
+
+                      </div>
+      </div>
+
+      </div>
+    </div>
+  </header></div>
+  <app-login></app-login>

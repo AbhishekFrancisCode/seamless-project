@@ -1,0 +1,85 @@
+<div class="section-content">
+
+    <div class="tab-pane">
+        <div class="sf-tabs-content">
+            <form ngNoForm method="POST" target="_blank" class="container"
+                action="https://uat-bluebox-gateway.indipaisa.com/pg/pg/payments/v1/pay/request"
+                enctype="application/x-www-form-urlencoded">
+
+                <h2 style="text-decoration: underline;">Payment Information</h2>
+                
+                <input type="hidden" [(ngModel)]="gatewayId" name="gatewayId" />
+
+                <input type="hidden" [(ngModel)]="msg_digest_string" name="signature" />
+
+                <input type="hidden" value="capture" name="action" />
+
+                <input type="hidden" [(ngModel)]="referenceId" name="referenceId" />
+
+                <div class="row">
+                    <div class="form-group ml-5">
+                        <label class="form-label" for="amount">Amount :</label>
+                        <input type="text" class="form-control" [(ngModel)]="amount" id="amount" name="amount"
+                            readonly />
+                    </div>
+                </div>
+
+                <input type="hidden" value="INR" name="currency" />
+
+                <input type="hidden" value="TEST" name="mode" />
+
+                <h4 class="text-capitalize my-2" style="text-decoration: underline;">Please provide the below
+                    information:</h4>
+
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="UserName">Name:</label>
+                        <input type="text" class="form-control" id="UserName" value="TEST" name="name" required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="Adress">Adress:</label>
+                        <input type="text" class="form-control" id="Adress" value="TEST ADD" name="address" required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="City">City:</label>
+                        <input type="text" class="form-control" id="City" value="TEST CITY" name="city" required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="State">State:</label>
+                        <input type="text" class="form-control" id="State" value="TEST STATE" name="state" required />
+                    </div>
+                </div>
+
+                <input type="hidden" value="IN" name="country" />
+
+                <div class="row mt-2">
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="Description">Description:</label>
+                        <input type="text" class="form-control" id="Description" value="desc" name="description"
+                            required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="Phone Number">Phone Number:</label>
+                        <input type="text" class="form-control" id="Phone Number" value="8844884455" name="phone"
+                            required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-label" for="Email">Email:</label>
+                        <input type="text" class="form-control" id="Email" value="test@email.com" name="email"
+                            required />
+                    </div>
+
+                </div>
+                <div class="form-group col-md-3" hidden>
+                    <input type="text" class="form-control" value="http://localhost:4200/" name="returnUrl" />
+                </div>
+
+                <input type="hidden" value="3" name="channel" />
+
+                <div class="row my-4" style="display: block; text-align: center;">
+                    <input type="submit" class="btn btn-primary col-md-3" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

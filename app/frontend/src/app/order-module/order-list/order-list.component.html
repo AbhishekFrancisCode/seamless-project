@@ -1,0 +1,65 @@
+<nb-card>
+      <nb-card-body>
+        <nb-stepper orientation="horizontal">
+          <nb-step [label]="label">
+            <ng-template #label>Orders
+              {{ Order_List.length }}
+            </ng-template>
+            <div class="row">
+              <a nbButton href="Order" status="success" size="small">Manage Order</a>
+          </div><br>
+          <span>New: {{ result.length }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>In progress: {{ result1.length }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>Completed: {{ result2.length }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>Hold: {{ result3.length }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>Rejected:{{ result4.length }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><hr>
+            <p class="lorem">
+              <ng2-smart-table [settings]="settings" [source]="Order_List"></ng2-smart-table>
+            </p>
+          </nb-step>
+          <nb-step [label]="labelOne" >
+            <ng-template #labelOne (click)="New();">NEW
+              {{ result.length }}
+            </ng-template>
+            <p class="lorem" id="display">
+       
+              <ng2-smart-table [settings]="settings" [source]="result"></ng2-smart-table>
+           </p>
+          </nb-step>
+          <nb-step [label]="labelTwo">
+            <ng-template #labelTwo>In progress
+              {{ result1.length }}
+            </ng-template>
+            <p class="lorem">
+               <ng2-smart-table [settings]="settings" [source]="result1"></ng2-smart-table>
+            </p>
+          </nb-step>
+          <nb-step [label]="labelThree">
+            <ng-template #labelThree> Completed
+              {{ result2.length }}
+            </ng-template>
+            <p class="lorem">
+              <ng2-smart-table [settings]="settings" [source]="result2"></ng2-smart-table>
+            </p>
+          </nb-step>
+          <nb-step [label]="labelFour">
+            <ng-template #labelFour>Hold
+              {{ result3.length }}
+            </ng-template>
+            
+            <p class="lorem">
+              <ng2-smart-table [settings]="settings" [source]="result3"></ng2-smart-table>
+            </p>
+          </nb-step>
+          <nb-step [label]="labelFive">
+            <ng-template #labelFive>Rejected
+              {{ result4.length }}
+            </ng-template>
+           
+            <p class="lorem">
+              <ng2-smart-table [settings]="settings" [source]="result4"></ng2-smart-table>
+            </p>
+          </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card>

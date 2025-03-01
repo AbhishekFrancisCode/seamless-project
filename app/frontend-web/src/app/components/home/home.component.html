@@ -1,0 +1,231 @@
+<section class="aon-banner-area2">
+    <!--banner 2-->
+    <div class="container">
+        <div class="aone-banner-area2-inner">
+            <div class="row d-flex align-items-center">
+                <!--Banner Left-->
+                <div class="col-lg-5 col-md-12">
+                    <div class="aon-bnr2-content-wrap">
+                        <!--Banner Text-->
+                        <div class="aon-bnr-write">
+                            <h2 class="text-top-line">Contact
+                                <span class="text-secondry">Experts</span> &amp;
+                            </h2>
+                            <h2 class="text-bot-line">Your Work's Done!</h2>
+                        </div>
+                        <!--Banner Text End-->
+                        <!--Seach Bar-->
+                        <div class="aon-bnr2-search-bar">
+                            <form>
+                                <div class="aon-bnr2-search-box" >
+                                    <div class="aon-search-input category-select">
+                                        {{unique()}}
+                                        <select  #value id="categorysrh" name="catid" title="Category" (change)="categories(value.value)"
+                                            class="form-control sf-form-control">
+                                            <option class="bs-title-option">Primary Services</option>
+                                            <option class="childcat" *ngFor="let item of vrs_category">
+                                                {{item.category_name}}
+                                        
+                                            </option>
+                                                                                                                    -->
+                                        </select>
+                                        {{reset()}}
+                                    </div>
+                      
+                                    <div class="aon-search-btn-wrap">
+                                        <button *ngIf="!go_disable" class="aon-search-btn" [routerLink]="['/ServiceShow']"
+                                        [queryParams]="{'ServiceName': selected_category}">
+                                            Go
+                                        </button>
+                                        <button *ngIf="go_disable" class="aon-search-btn" [routerLink]="['/ServiceShow']"
+                                        [queryParams]="{'ServiceName': selected_category}" >
+                                        Go
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="aon-bnr2-search-bar">
+                            <form>
+                                <div class="aon-bnr2-search-box" >
+                                    <div class="aon-search-input category-select">
+                                        {{unique()}}
+                                        <select  #values id="categorysrh" name="catid" title="Category" (change)="categories(values.value)"
+                                            class="form-control sf-form-control">
+                                            <option class="bs-title-option">We also offer our services in
+                                                the following areas:</option>
+                                            <!-- <option class="bs-title-option" value="">We also offer our services in
+                                                the following areas:</option> -->
+                                            <!-- <option value="03" data-content="<img class='childcat-img' width='50' height='auto' src=.\assets\images\cat-thum\cat-3.jpg>
+                                                <span class='childcat'>Vehicle Insurance related services</span>">Vehicle
+                                                            Insurance related services
+                                                        </option> -->
+                                            <!-- <option value="01" *ngFor="let item of other_category" data-content="<img class='childcat-img' width='50' height='auto' src=assets\images\cat-thum\cat-4.jpg>
+                                                <span class='childcat'></span>">{{item.category_name}}
+                                              </option> -->
+                                            <option class="childcat"  *ngFor="let item of other_category">
+                                                <img class='childcat-img' width='50' height='auto' src=assets\images\cat-thum\cat-4.jpg><span class='childcat'></span>{{item.category_name}}
+                                        
+                                            </option>
+                                            <!-- <option class="childcat"  *ngFor="let item of other_category">
+                                                {{item.category_name}}
+                                        
+                                            </option> -->
+                                                                                                                    
+                                        </select>
+                                        {{reset()}}
+                                    </div>
+                      
+                                    <div class="aon-search-btn-wrap">
+                                        <button id='contact1' *ngIf="!go_disable" class="aon-search-btn" routerLink="/contact"
+                                        [queryParams]="{'ServiceName': selected_category,'id': 'contact1'}" >
+                                            Go
+                                        </button>
+                                        <button id='contact1' *ngIf="go_disable" class="aon-search-btn" routerLink="/contact"
+                                        [queryParams]="{'ServiceName': selected_category,'id': 'contact1'}" >
+                                        Go
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+<!-- 
+                        <div class="aon-bnr2-search-bar">
+                            <form>
+                                <div class="aon-bnr2-search-box">
+                                    <div class="aon-search-input category-select">
+                                        {{unique()}}
+                                        <div
+                                            class="dropdown bootstrap-select form-control sf-form-control aon-categories-select sf-select-box">
+                                            <select id="categorysrh" name="catid" #values  title="Category" (change)="categories(values.value)"
+                                                class="form-control sf-form-control aon-categories-select sf-select-box"
+                                                title="We also offer our services in the following areas:"
+                                                tabindex="-98" defaultValue='07'>
+                                                <option class="bs-title-option" value=""></option>
+                                                <option class="bs-title-option" value="">We also offer our services in
+                                                    the following areas:</option>
+                                                    <option class="childcat" *ngFor="let item of other_category">
+                                                        {{item.category_name}}
+                                                    </option>
+                                            </select>
+                                            {{reset()}}
+                                            <div class="dropdown-menu"
+                                                style="max-height: 385.219px; overflow: hidden; min-height: 104px; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -2px, 0px);"
+                                                x-placement="top-start">
+                                                <div class="inner show" role="listbox" id="bs-select-2" tabindex="-1"
+                                                    style="max-height: 367.219px; overflow-y: auto; min-height: 86px;">
+                                                    <ul class="dropdown-menu inner show" role="presentation"
+                                                        style="margin-top: 0px; margin-bottom: 0px;">
+                                                        <li>
+                                                            <a role="option" class="dropdown-item bs-title-option"
+                                                                id="bs-select-2-0" tabindex="0">
+                                                                <span class="text">We also offer our services in the
+                                                                    following areas:</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="option" class="dropdown-item" id="bs-select-2-1"
+                                                                tabindex="0">
+                                                                <span class="text"><img class="childcat-img" width="50"
+                                                                        height="auto" src="images\cat-thum\cat-3.jpg">
+                                                                    <span class="childcat">Vehicle Insurance related
+                                                                        services</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="option" class="dropdown-item" id="bs-select-2-2"
+                                                                tabindex="0">
+                                                                <span class="text"><img class="childcat-img" width="50"
+                                                                        height="auto" src="images\cat-thum\cat-5.jpg">
+                                                                    <span class="childcat">National Permit
+                                                                        Authorization</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="option" class="dropdown-item" id="bs-select-2-3"
+                                                                tabindex="0">
+                                                                <span class="text"><img class="childcat-img" width="50"
+                                                                        height="auto" src="images\cat-thum\cat-6.jpg">
+                                                                    <span class="childcat">Trade Certificate</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="option" class="dropdown-item" id="bs-select-2-4"
+                                                                tabindex="0" aria-setsize="7" aria-posinset="5">
+                                                                <span class="text"><img class="childcat-img" width="50"
+                                                                        height="auto" src="images\cat-thum\cat-1.jpg">
+                                                                    <span class="childcat">Check Post Tax</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="option" class="dropdown-item" id="bs-select-2-5"
+                                                                tabindex="0" aria-setsize="7" aria-posinset="6">
+                                                                <span class="text"><img class="childcat-img" width="50"
+                                                                        height="auto" src="images\cat-thum\cat-2.jpg">
+                                                                    <span class="childcat">E-Challan - RTO &amp;
+                                                                        Police</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a role="option" class="dropdown-item" id="bs-select-2-6"
+                                                                tabindex="0" aria-setsize="7" aria-posinset="7">
+                                                                <span class="text"><img class="childcat-img" width="50"
+                                                                        height="auto" src="images\cat-thum\cat-4.jpg">
+                                                                    <span class="childcat">Homologation</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                     
+                                    <div class="aon-search-btn-wrap">
+                                        <button class="aon-search-btn" type="submit" routerLink="/contact"  [queryParams]="{'ServiceName': selected_category}">GO</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> -->
+           
+                    </div>
+                </div>
+                <!--Banner Right-->
+                <div class="col-lg-7 col-md-12">
+                    <div class="aon-bnr2-media-wrap">
+                        <!-- COLUMNS 1 -->
+                        <div class="aon-bnr2-media">
+                            <img src="../../../assets/images/banner2/1A.png" alt="">
+                        </div>
+                        <!-- COLUMNS 2 -->
+                        <div class="aon-bnr2-lines-left">
+                            <div class="aon-bnr2-line-left-content">
+                                <img src="../../../assets/images/banner2/line-left.png" alt="">
+                                <span class="circle-l-1 slide-fwd-center"></span>
+                                <span class="circle-l-2 slide-fwd-center2"></span>
+                                <span class="circle-l-3 slide-fwd-center3"></span>
+                            </div>
+                        </div>
+                        <!-- COLUMNS 3 -->
+                        <div class="aon-bnr2-lines-right">
+                            <img src="../../../assets/images/banner2/line-right.png" alt="">
+                            <span class="circle-r-1 slide-fwd-center3"></span>
+                            <span class="circle-r-2 slide-fwd-center2"></span>
+                            <span class="circle-r-3 slide-fwd-center"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
