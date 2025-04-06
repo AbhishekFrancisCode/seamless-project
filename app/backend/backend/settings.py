@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'razorpaypg',
     'reportengine',
     'worldline',
-    'reversion',
+    #'reversion',
 ]
 
 MIDDLEWARE = [
@@ -103,8 +103,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'radient',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'PASSWORD' : 'root',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
             'autocommit': True,
@@ -209,8 +209,8 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': datetime.timedelta(days=1),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': datetime.timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': datetime.timedelta(days=10),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': datetime.timedelta(days=10),
 }
 
 CORS_ORIGIN_ALLOW_ALL = True

@@ -81,7 +81,7 @@ $(document).ready(function() {
 		type: 'POST',
 		cache: false,
 		data: str,
-		url: "/payments",
+		url: "/payment_service/payments/",
 		success: function (response)
 			{	
 				var configJson = response;
