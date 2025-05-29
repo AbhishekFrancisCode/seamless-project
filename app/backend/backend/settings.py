@@ -214,7 +214,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = [ 'http://localhost:4200','https://api-sos.seamlessonlineservices.com','http://127.0.0.1:8000/payment_service/paymentsResponse/']
+CSRF_TRUSTED_ORIGINS = [ 'http://localhost:4200','https://devapi-sos.seamlessonlineservices.com','http://127.0.0.1:8000/payment_service/paymentsResponse/']
 APPEND_SLASH = True
 
 STATIC_URL = '/static/'

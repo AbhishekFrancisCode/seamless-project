@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_SERVICE_URL:"http://127.0.0.1:8000",
-  RAZORPAY_ID:'rzp_test_JOC0wRKpLH1cVW',
+  BASE_SERVICE_URL: 'http://devapi-sos.seamlessonlineservices.com/',
+  RAZORPAY_ID: 'rzp_test_JOC0wRKpLH1cVW',
 };
 
 /*
