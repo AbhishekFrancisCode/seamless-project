@@ -28,8 +28,7 @@ SECRET_KEY = 'django-insecure-(4)$#=3oj&^^muh00(c+ocro+a(@oz$8xawz97!rqy$(33empk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','*']
-
+ALLOWED_HOSTS = ['devapi-sos.seamlessonlineservices.com', 'localhost', '127.0.0.1','*']
 
 # Application definition
 
@@ -103,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'radient',
         'USER': 'root',
-        'PASSWORD' : 'root',
+        'PASSWORD' : 'Password@123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
@@ -166,8 +165,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'projects@craftyouridea.com'
-EMAIL_HOST_PASSWORD = 'Project@CYI2023'
+EMAIL_HOST_USER = 'abhi09shek@gmail.com'
+EMAIL_HOST_PASSWORD = 'nadzajvymtjgllte'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.seamlessonlineservices.com'
 # EMAIL_USE_TLS = True
@@ -214,7 +213,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = [ 'http://localhost:4200','https://api-sos.seamlessonlineservices.com','http://127.0.0.1:8000/payment_service/paymentsResponse/']
+CSRF_TRUSTED_ORIGINS = [ 'http://localhost:4200','https://api-sos.seamlessonlineservices.com','http://127.0.0.1:8000/payment_service/paymentsResponse/','https://devapi-sos.seamlessonlineservices.com']
 APPEND_SLASH = True
 
 STATIC_URL = '/static/'

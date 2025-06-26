@@ -42,4 +42,9 @@ urlpatterns = [
     #path('payment_service/', include('razorpaypg.urls')),
     path('payment_service/', include('worldline.urls')),
     path('manage_reportengine/', include('reportengine.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Serve media files (e.g., uploaded images) in development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

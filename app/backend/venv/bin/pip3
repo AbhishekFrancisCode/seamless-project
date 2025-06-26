@@ -1,4 +1,4 @@
-#!/Users/francis/workspace/ST000027_RADIANT_DIGI-ST000027_RADIANT_DIGI_DEVELOP/app/backend/venv/bin/python3
+#!/home/ubuntu/seamless-project/app/backend/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

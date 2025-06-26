@@ -6,7 +6,7 @@ import os
 from backend.settings import BASE_DIR
 
 def read_data():
-    config_file_path = os.path.join(BASE_DIR, '/Users/francis/workspace/seamless-testing/seamless-project/app/backend/worldline/worldline_configuration.json')
+    config_file_path = os.path.join(BASE_DIR, '/home/ubuntu/seamless-project/app/backend/worldline_configuration.json')
     # config_file_path = os.path.join(BASE_DIR, '/SanadiTech/Radiant/ST000027_RADIANT_DIGI/app/backend/worldline_configuration.json')
     with open(config_file_path, 'r') as f:
         config_data = json.load(f)
