@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(4)$#=3oj&^^muh00(c+ocro+a(@oz$8xawz97!rqy$(33empk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['devapi-sos.seamlessonlineservices.com', 'localhost', '127.0.0.1','*']
 
